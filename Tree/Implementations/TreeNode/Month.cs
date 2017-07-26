@@ -9,18 +9,6 @@ namespace Tree.Implementations.TreeNode
     {
        
         #region Properties
-        private IList<Order> _orders = new List<Order>();
-        public override ICollection<IOrderLine> Orders
-        {
-            get
-            {
-                var ret = new List<IOrderLine>();
-                foreach (var ord in _orders)
-                    ret.Add(ord);
-
-                return ret;
-            }
-        }
         public MonthEn Value { get; set; }
 
         public override string NodeName
@@ -30,17 +18,7 @@ namespace Tree.Implementations.TreeNode
                 return Value.ToString();
             }
         }
-        public override ICollection<ITreeNode> ChildNodes
-        {
-            get
-            {
-                ICollection<ITreeNode> ret = new List<ITreeNode>();
-                foreach (var ord in _orders)
-                    if (ord.CanHasSubOrders)
-                        ret.Add(ord);
-                return ret;
-            }
-        }
+
         #endregion Properties
 
         #region Methods
@@ -59,17 +37,8 @@ namespace Tree.Implementations.TreeNode
             AddNewChild();
             AddNewChild();
         }
-        public override bool AddNewChild()
-        {
-            var child = CreateNewOrder();
-            if (child != null)
-            {
-                child.Parent = this;
-                _orders.Add(child);
-            }
-            return child != null;
-        }
-        private Order CreateNewOrder()
+
+        public override ITreeNode CreateNewChild()
         {
             return  new Order(true) {
                     Year = 2017, 

@@ -37,7 +37,17 @@ namespace Tree.Implementations.TreeNode
             } 
         }
 
-        public bool CanHasChildren { get; set; }
+        public virtual bool CanHasChildren
+        {
+            get
+            {
+                return true;
+            }
+            set
+            {
+
+            }
+        }
         #endregion Properties
 
         protected ICollection<ITreeNode> _childNodes = new List<ITreeNode>();

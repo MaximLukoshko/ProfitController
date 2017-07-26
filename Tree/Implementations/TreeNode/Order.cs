@@ -19,7 +19,6 @@ namespace Tree.Implementations.TreeNode
         public string InstalledDetails { get; set; }
         public double Income { get; set; }
         public double Outgo { get; set; }
-        public bool CanHasSubOrders { get; set; }
         #endregion IOrderLine
         public override string NodeName
         {
@@ -29,51 +28,40 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
-        public override ICollection<IOrderLine> Orders
-        {
-            get
-            {
-                return new List<IOrderLine>(_suborders);
-            }
-        }
-
         public virtual ICollection<ITreeNode> ChildNodes
         {
             get
             {
-                ICollection<ITreeNode> ret = new List<ITreeNode>();
-                foreach (var ord in _suborders)
-                    if (ord.CanHasSubOrders)
-                        ret.Add(ord);
+                var ret = new List<ITreeNode>();
+                foreach (var child in _childNodes)
+                    if (child.CanHasChildren)
+                        ret.Add(child);
                 return ret;
             }
         }
 
+        public override ICollection<IOrderLine> Orders
+        {
+            get
+            {
+                var ret = new List<IOrderLine>();
+                ret.Add(this);
+                ret.AddRange(base.Orders);
+                return ret;
+            }
+        }
+        public override bool CanHasChildren { get; set; }
         #endregion Properties
-
-        private IList<Order> _suborders = new List<Order>();
        
         #region Methods
         public Order(bool canHasSubOrders = false)
         {
-            CanHasSubOrders = canHasSubOrders;
-            if (CanHasSubOrders)
+            CanHasChildren = canHasSubOrders;
+            if (CanHasChildren)
                 AddNewChild();
         }
 
-
-        public override bool AddNewChild()
-        {
-            var child = CreateNewSubOrder();
-            if (child != null)
-            {
-                child.Parent = this;
-                _suborders.Add(child);
-            }
-            return child != null;
-        }
-
-        private Order CreateNewSubOrder()
+        public override ITreeNode CreateNewChild()
         {
             return new Order();
         }
