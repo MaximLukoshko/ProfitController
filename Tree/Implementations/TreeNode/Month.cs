@@ -55,50 +55,34 @@ namespace Tree.Implementations.TreeNode
         public Month(int month)
         {
             Value = (MonthEn) month;
-            _orders = new List<Order>
-            {
-                new Order(true) {
-                    Year = 2017, 
-                    Month = (MonthEn)1,
-                    Day= 25, 
-                    DeviceName ="DeviceName",
-                    Address ="Address",
-                    Phone ="Phone",
-                    JobType ="JobType",
-                    InstalledDetails ="InstalledDetails",
-                    Income =2000,
-                    Outgo =500
-                },
-                new Order(true) {
-                    Year = 2017, 
-                    Month = (MonthEn)1,
-                    Day= 25, 
-                    DeviceName ="DeviceName",
-                    Address ="Address",
-                    Phone ="Phone",
-                    JobType ="JobType",
-                    InstalledDetails ="InstalledDetails",
-                    Income =2000,
-                    Outgo =500
-                },
-                new Order(true) {
-                    Year = 2017, 
-                    Month = (MonthEn)1,
-                    Day= 25, 
-                    DeviceName ="DeviceName",
-                    Address ="Address",
-                    Phone ="Phone",
-                    JobType ="JobType",
-                    InstalledDetails ="InstalledDetails",
-                    Income =2000,
-                    Outgo =500
-                },
-            };
+            AddNewChild();
+            AddNewChild();
+            AddNewChild();
         }
-
-        public override ITreeNode CreateNewChild()
+        public override bool AddNewChild()
         {
-            return new Order();
+            var child = CreateNewOrder();
+            if (child != null)
+            {
+                child.Parent = this;
+                _orders.Add(child);
+            }
+            return child != null;
+        }
+        private Order CreateNewOrder()
+        {
+            return  new Order(true) {
+                    Year = 2017, 
+                    Month = (MonthEn)1,
+                    Day= 25, 
+                    DeviceName ="DeviceName",
+                    Address ="Address",
+                    Phone ="Phone",
+                    JobType ="JobType",
+                    InstalledDetails ="InstalledDetails",
+                    Income =2000,
+                    Outgo =500
+                };
         }
 
         #endregion Methods

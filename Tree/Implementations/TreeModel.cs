@@ -23,8 +23,8 @@ namespace Tree.Implementations
         public TreeModel()
         {
             Root = new UndefinedTreeNode();
-            Root.ChildNodes.Add(new Year(2016));
-            Root.ChildNodes.Add(new Year(2017));
+            Root.AddNewChild();
+            Root.AddNewChild();
         }
     }
 }

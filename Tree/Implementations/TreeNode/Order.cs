@@ -66,7 +66,10 @@ namespace Tree.Implementations.TreeNode
         {
             var child = CreateNewSubOrder();
             if (child != null)
+            {
+                child.Parent = this;
                 _suborders.Add(child);
+            }
             return child != null;
         }
 

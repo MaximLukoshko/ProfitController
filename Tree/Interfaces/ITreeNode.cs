@@ -14,6 +14,7 @@ namespace Tree.Interfaces
         ICollection<IOrderLine> Orders { get; }
         IDictionary<string, object> Summary { get; }
         ICollection<ITreeNode> ChildNodes { get; }
+        ITreeNode Parent { get; set; }
         #endregion Properties
 
         #region Methods

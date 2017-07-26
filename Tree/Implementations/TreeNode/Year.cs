@@ -7,22 +7,12 @@ namespace Tree.Implementations.TreeNode
     public class Year : TreeNodeBase
     {
         #region Properties
-
-        private IList<Month> Monthes { get; set; }
-
         private int Value { get; set; }
         public override string NodeName
         {
             get
             {
                 return Value.ToString();
-            }
-        }
-        public override ICollection<ITreeNode> ChildNodes
-        {
-            get 
-            {
-                return new List<ITreeNode>(Monthes);
             }
         }
         #endregion Properties
@@ -32,12 +22,15 @@ namespace Tree.Implementations.TreeNode
         public Year(int val = 0)
         {
             Value = val;
-            Monthes = new List<Month> {new Month(0), new Month(1), new Month(2)};
+            AddNewChild();
+            AddNewChild();
+            AddNewChild();
+            AddNewChild();
         }
 
         public override ITreeNode CreateNewChild()
         {
-            return Monthes.Count < 12 ? new Month(Monthes.Count) : null;
+            return ChildNodes.Count < 12 ? new Month(ChildNodes.Count) : null;
         }
         #endregion Methods
     }
