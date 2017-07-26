@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using Tree.Implementations;
 using Tree.Implementations.TreeNode;
 using Tree.Interfaces;
@@ -27,6 +28,12 @@ namespace ProfitController
 
             trw_Orders.ItemsSource = Nodes;
             //dgrd_Orders.ItemsSource = Nodes[0].Orders;
+        }
+
+        private void treeItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var sel = (ITreeNode)trw_Orders.SelectedItem;
+            dgrd_Orders.ItemsSource = sel.Orders;
         }
     }
 }
