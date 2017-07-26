@@ -34,5 +34,17 @@ namespace ProfitController
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             dgrd_Orders.ItemsSource = sel.Orders;
         }
+
+        private void Row_Add(object sender, RoutedEventArgs e)
+        {
+            var sel = (ITreeNode)trw_Orders.SelectedItem;
+            sel.AddNewChild();
+        }
+
+        private void Row_Delete(object sender, RoutedEventArgs e)
+        {
+            var sel = (ITreeNode)trw_Orders.SelectedItem;
+            sel.RemoveThis();
+        }
     }
 }

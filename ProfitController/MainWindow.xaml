@@ -16,8 +16,8 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel.ContextMenu>
                         <ContextMenu>
-                                <MenuItem Header="Добавить" Command="{Binding Row_Add}"/>
-                                <MenuItem Header="Удалить" Command="{Binding Row_Delete}"/>
+                                <MenuItem Header="Добавить" Command="{Binding Command}" Click="Row_Add"/>
+                                <MenuItem Header="Удалить" Command="{Binding Command}" Click="Row_Delete"/>
                             </ContextMenu>
                     </StackPanel.ContextMenu>
                     <TextBlock Text="{Binding NodeName}" Margin="0,0,7,0"/>
