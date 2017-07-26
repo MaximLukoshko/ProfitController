@@ -17,8 +17,8 @@ namespace Tree.Interfaces
         #endregion Properties
 
         #region Methods
-        bool AddNewCild();
-//        bool RemoveThis();
+        bool AddNewChild();
+        bool RemoveThis();
         #endregion Methods
     }
 }

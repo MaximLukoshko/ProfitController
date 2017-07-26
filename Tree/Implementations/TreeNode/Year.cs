@@ -29,18 +29,15 @@ namespace Tree.Implementations.TreeNode
 
         #region Methods
 
-        public Year(int val)
+        public Year(int val = 0)
         {
             Value = val;
             Monthes = new List<Month> {new Month(0), new Month(1), new Month(2)};
         }
 
-        public override bool AddNewCild()
+        public override ITreeNode CreateNewChild()
         {
-            bool ret = Monthes.Count < 12;
-            if (ret)
-                Monthes.Add(new Month(Monthes.Count));
-            return ret;
+            return Monthes.Count < 12 ? new Month(Monthes.Count) : null;
         }
         #endregion Methods
     }

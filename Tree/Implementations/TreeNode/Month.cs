@@ -97,10 +97,9 @@ namespace Tree.Implementations.TreeNode
             };
         }
 
-        public override bool AddNewCild()
+        public override ITreeNode CreateNewChild()
         {
-            _orders.Add(new Order(true));
-            return true;
+            return new Order();
         }
 
         #endregion Methods

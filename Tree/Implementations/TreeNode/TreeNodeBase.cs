@@ -29,12 +29,36 @@ namespace Tree.Implementations.TreeNode
                 throw new NotImplementedException();
             } 
         }
-        public abstract ICollection<ITreeNode> ChildNodes { get; }
+        public virtual ICollection<ITreeNode> ChildNodes 
+        { 
+            get
+            {
+                return _childNodes;
+            } 
+        }
         #endregion Properties
 
+        protected ICollection<ITreeNode> _childNodes = new List<ITreeNode>();
+        private ITreeNode _parentNode { get; set; }
         #region Methods
-        public abstract bool AddNewCild();
+        public abstract ITreeNode CreateNewChild();
      
+        public bool RemoveThis()
+        {
+            var parent = this._parentNode;
+            return parent != null ? parent.ChildNodes.Remove(this) : false;
+        }
         #endregion Methods
+
+
+        public bool AddNewChild()
+        {
+            var child = CreateNewChild();
+            
+            if (child != null)
+                _childNodes.Add(child);
+            
+            return child != null;
+        }
     }
 }

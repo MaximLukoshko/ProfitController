@@ -21,19 +21,11 @@ namespace Tree.Implementations.TreeNode
         public double Outgo { get; set; }
         public bool CanHasSubOrders { get; set; }
         #endregion IOrderLine
-        private IList<Order> _childs = new List<Order>();
         public override string NodeName
         {
             get
             {
                 return string.Format("{0}: {1}", Day, DeviceName);
-            }
-        }
-        public override ICollection<ITreeNode> ChildNodes
-        {
-            get
-            {
-                return new List<ITreeNode>(_childs);
             }
         }
         #endregion Properties
@@ -42,12 +34,13 @@ namespace Tree.Implementations.TreeNode
         public Order(bool canHasSubOrders = false)
         {
             CanHasSubOrders = canHasSubOrders;
+            if (CanHasSubOrders)
+                AddNewChild();
         }
 
-        public override bool AddNewCild()
+        public override ITreeNode CreateNewChild()
         {
-            _childs.Add(new Order(true));
-            return true;
+            return new Order();
         }
         #endregion Methods
     }
