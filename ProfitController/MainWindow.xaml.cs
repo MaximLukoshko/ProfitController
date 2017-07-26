@@ -27,7 +27,6 @@ namespace ProfitController
             InitializeComponent();
 
             trw_Orders.ItemsSource = Nodes;
-            //dgrd_Orders.ItemsSource = Nodes[0].Orders;
         }
 
         private void treeItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
