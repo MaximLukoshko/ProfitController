@@ -18,7 +18,6 @@ namespace Tree.Implementations.TreeNode
                 foreach (var ord in _orders)
                     ret.Add(ord);
 
-                ret.AddRange(base.Orders);
                 return ret;
             }
         }

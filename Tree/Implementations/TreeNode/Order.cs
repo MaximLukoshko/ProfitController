@@ -28,8 +28,31 @@ namespace Tree.Implementations.TreeNode
                 return string.Format("{0}: {1}", Day, DeviceName);
             }
         }
+
+        public override ICollection<IOrderLine> Orders
+        {
+            get
+            {
+                return new List<IOrderLine>(_suborders);
+            }
+        }
+
+        public virtual ICollection<ITreeNode> ChildNodes
+        {
+            get
+            {
+                ICollection<ITreeNode> ret = new List<ITreeNode>();
+                foreach (var ord in _suborders)
+                    if (ord.CanHasSubOrders)
+                        ret.Add(ord);
+                return ret;
+            }
+        }
+
         #endregion Properties
 
+        private IList<Order> _suborders = new List<Order>();
+       
         #region Methods
         public Order(bool canHasSubOrders = false)
         {
@@ -38,10 +61,21 @@ namespace Tree.Implementations.TreeNode
                 AddNewChild();
         }
 
-        public override ITreeNode CreateNewChild()
+
+        public override bool AddNewChild()
+        {
+            var child = CreateNewSubOrder();
+            if (child != null)
+                _suborders.Add(child);
+            return child != null;
+        }
+
+        private Order CreateNewSubOrder()
         {
             return new Order();
         }
+
+
         #endregion Methods
     }
 }
