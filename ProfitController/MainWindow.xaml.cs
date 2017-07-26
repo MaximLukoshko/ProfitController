@@ -29,10 +29,22 @@ namespace ProfitController
             trw_Orders.ItemsSource = Nodes;
         }
 
-        private void treeItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
+        private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        { 
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             dgrd_Orders.ItemsSource = sel.Orders;
+        }
+
+        private void Row_Add(object sender, RoutedEventArgs e)
+        {
+            var sel = (ITreeNode)trw_Orders.SelectedItem;
+            sel.AddNewChild();
+        }
+
+        private void Row_Delete(object sender, RoutedEventArgs e)
+        {
+            var sel = (ITreeNode)trw_Orders.SelectedItem;
+            sel.RemoveThis();
         }
     }
 }
