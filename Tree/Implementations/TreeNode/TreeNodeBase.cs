@@ -41,7 +41,10 @@ namespace Tree.Implementations.TreeNode
         protected ICollection<ITreeNode> _childNodes = new List<ITreeNode>();
         private ITreeNode _parentNode { get; set; }
         #region Methods
-        public abstract ITreeNode CreateNewChild();
+        public virtual ITreeNode CreateNewChild()
+        {
+            return null;
+        }
      
         public bool RemoveThis()
         {
@@ -51,7 +54,7 @@ namespace Tree.Implementations.TreeNode
         #endregion Methods
 
 
-        public bool AddNewChild()
+        public virtual bool AddNewChild()
         {
             var child = CreateNewChild();
             
