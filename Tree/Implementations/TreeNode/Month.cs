@@ -9,7 +9,7 @@ namespace Tree.Implementations.TreeNode
     {
        
         #region Properties
-        private IList<IOrder> _orders = new List<IOrder>();
+        private IList<Order> _orders = new List<Order>();
         public override ICollection<IOrderLine> Orders
         {
             get
@@ -56,7 +56,7 @@ namespace Tree.Implementations.TreeNode
         public Month(int month)
         {
             Value = (MonthEn) month;
-            _orders = new List<IOrder>
+            _orders = new List<Order>
             {
                 new Order(true) {
                     Year = 2017, 

@@ -4,7 +4,7 @@ using Tree.BaseEnums;
 using Tree.Interfaces;
 namespace Tree.Implementations.TreeNode
 {
-    public class Order : TreeNodeBase, IOrder
+    public class Order : TreeNodeBase, IOrderLine
     {
         #region Properties
         
@@ -21,7 +21,7 @@ namespace Tree.Implementations.TreeNode
         public double Outgo { get; set; }
         public bool CanHasSubOrders { get; set; }
         #endregion IOrderLine
-        private IList<IOrder> _childs = new List<IOrder>();
+        private IList<Order> _childs = new List<Order>();
         public override string NodeName
         {
             get

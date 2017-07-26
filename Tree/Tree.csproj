@@ -42,7 +42,6 @@
     <Compile Include="BaseEnums.cs" />
     <Compile Include="Implementations\OrderLine\OrderLine.cs" />
     <Compile Include="Implementations\TreeNode\TreeNodeBase.cs" />
-    <Compile Include="Interfaces\IOrder.cs" />
     <Compile Include="Interfaces\IOrderLine.cs" />
     <Compile Include="Interfaces\ITreeNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
