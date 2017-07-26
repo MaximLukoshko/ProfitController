@@ -36,6 +36,8 @@ namespace Tree.Implementations.TreeNode
                 return _childNodes;
             } 
         }
+
+        public bool CanHasChildren { get; set; }
         #endregion Properties
 
         protected ICollection<ITreeNode> _childNodes = new List<ITreeNode>();

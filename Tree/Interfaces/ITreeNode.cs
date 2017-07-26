@@ -15,6 +15,7 @@ namespace Tree.Interfaces
         IDictionary<string, object> Summary { get; }
         ICollection<ITreeNode> ChildNodes { get; }
         ITreeNode Parent { get; set; }
+        bool CanHasChildren { get; }
         #endregion Properties
 
         #region Methods
