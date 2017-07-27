@@ -37,6 +37,7 @@ namespace ProfitController
 
         private void Row_Add(object sender, RoutedEventArgs e)
         {
+            //Подходит ли selecteditem?
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             sel.AddNewChild();
         }
@@ -45,6 +46,16 @@ namespace ProfitController
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             sel.RemoveThis();
+        }
+
+        private void AddToGrid_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("I work");
+        }
+
+        private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("I work");
         }
     }
 }
