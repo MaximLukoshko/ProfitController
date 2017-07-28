@@ -63,19 +63,21 @@ namespace Tree.Implementations.TreeNode
                 return this;
             }
         }
-        public override bool CanHasChildren 
-        { 
+        public override bool CanHasChildren
+        {
             get
             {
-                return _childNodes.Count > 0;
+                return _canHasChildren;
             }
         }
         #endregion Properties
-       
+        private bool _canHasChildren = false;
+
         #region Methods
         public Order(bool canHasSubOrders = false)
         {
-            if (canHasSubOrders)
+            _canHasChildren = canHasSubOrders;
+            if (CanHasChildren)
                 AddChild();
         }
 
