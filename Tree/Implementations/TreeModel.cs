@@ -26,5 +26,15 @@ namespace Tree.Implementations
             Root.AddNewChild();
             Root.AddNewChild();
         }
+
+
+        public void InitModel(ITreeNode root)
+        {
+            if(root !=null)
+            {
+                Root = null;
+                Root = root;
+            }
+        }
     }
 }

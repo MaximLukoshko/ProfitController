@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DAOLayer.Implementations;
+using DAOLayer.Interfaces;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
@@ -14,11 +16,20 @@ namespace ProfitController
     public partial class MainWindow : Window
     {
         private ITreeModel _model = new TreeModel();
+        private IDAO _dao = new DAO();
         public ICollection<ITreeNode> Nodes 
         { 
             get
             {
                 return _model.Nodes;
+            }
+        }
+
+        public IDAO DataAcsessObject
+        {
+            get
+            {
+                return _dao;
             }
         }
 

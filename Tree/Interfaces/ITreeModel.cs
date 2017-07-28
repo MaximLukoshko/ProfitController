@@ -9,5 +9,6 @@ namespace Tree.Interfaces
     public interface ITreeModel
     {
         ICollection<ITreeNode> Nodes { get; }
+        void InitModel(ITreeNode root);
     }
 }

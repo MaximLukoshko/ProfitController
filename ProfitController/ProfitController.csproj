@@ -94,6 +94,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAOLayer\DAOLayer.csproj">
+      <Project>{f3cc434e-f6ef-4ece-9a62-e4d99a754f9b}</Project>
+      <Name>DAOLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tree\Tree.csproj">
       <Project>{8b076bd3-e26b-43f9-82e4-fc7ca0e9874c}</Project>
       <Name>Tree</Name>
