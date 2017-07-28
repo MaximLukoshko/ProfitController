@@ -26,6 +26,15 @@
         </TreeView>
 
         <DataGrid Name="dgrd_Orders"  Width="Auto" Margin="5" Grid.Column="1" AutoGenerateColumns="False">
+            
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" HorizontalAlignment="Stretch" Click="AddToGrid_Click"/>
+                    <MenuItem Header="Удалить" HorizontalAlignment="Stretch" Click="DeleteFromGrid_Click"/>
+                    <!--<MenuItem Name="ContextMenuInsert" Header="_Вставить" HorizontalAlignment="Stretch"/>-->
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Год" Width="Auto" Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Месяц" Width="Auto" Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}"/>
