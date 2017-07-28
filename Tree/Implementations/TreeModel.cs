@@ -29,11 +29,15 @@ namespace Tree.Implementations
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)
         {
+            if(node != null)
+                node.AddNewChild();
             return true;
         }
 
         public bool AddOrderToNode(ITreeNode node)
         {
+            if (node != null)
+                node.RemoveThis();
             return true;
         }
 

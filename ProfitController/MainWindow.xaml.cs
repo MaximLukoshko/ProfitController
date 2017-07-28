@@ -54,7 +54,8 @@ namespace ProfitController
         private void Row_Add(object sender, RoutedEventArgs e)
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
-            sel.AddNewChild();
+            if(sel!=null)
+                sel.AddNewChild();
             UpdateWindow();
         }
 
@@ -67,12 +68,12 @@ namespace ProfitController
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("I work");
+            
         }
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("I work");
+            
         }
 
     }
