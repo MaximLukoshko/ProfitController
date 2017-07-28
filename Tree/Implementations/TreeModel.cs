@@ -29,29 +29,24 @@ namespace Tree.Implementations
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)
         {
-            if(node != null)
-                node.AddChild();
-            return true;
+            return node != null ? node.RemoveOrder(orderLine) : false;
         }
 
         public bool AddOrderToNode(ITreeNode node)
         {
-            if (node != null)
-                node.RemoveThis();
-            return true;
+            return node != null ? node.AddOrder() : false;
         }
 
         public bool RemoveNode(ITreeNode node)
         {
-            return true;
+            return node != null ? node.RemoveThis() : false; ;
         }
 
-        public bool AddChildToNode(ITreeNode node, ITreeNode childNode)
+        public bool AddChildToNode(ITreeNode node, ITreeNode childNode = null)
         {
             if (node == null)
                 return false;
-            childNode = childNode ?? node.CreateNewChild();
-            return childNode != null ? node.AddChild(childNode) : false;
+            return node.AddChild(childNode);
         }
 
         public void InitModel(ITreeNode root)

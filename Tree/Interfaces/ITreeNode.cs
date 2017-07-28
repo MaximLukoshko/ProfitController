@@ -22,6 +22,8 @@ namespace Tree.Interfaces
         ITreeNode CreateNewChild();
         bool AddChild(ITreeNode child = null);
         bool RemoveThis();
+        bool AddOrder();
+        bool RemoveOrder(IOrderLine orderLine);
         #endregion Methods
     }
 }
