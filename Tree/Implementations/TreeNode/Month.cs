@@ -19,6 +19,22 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
+        public override ICollection<IOrderLine> Orders
+        {
+            get
+            {
+                var ret = new List<IOrderLine>();
+                foreach (var child in ChildNodes)
+                {
+                    var ord = child as IOrder;
+                    if (ord != null && ord.CanHasChildren)
+                        ret.Add(ord.Order);
+                    else
+                        ret.AddRange(ord.Orders);
+                }
+                return ret;
+            }
+        }
         #endregion Properties
 
         #region Methods
