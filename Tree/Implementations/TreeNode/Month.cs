@@ -56,6 +56,7 @@ namespace Tree.Implementations.TreeNode
 
         public override ITreeNode CreateNewChild()
         {
+            // Must be GroupOrder class
             return  new Order(true) {
                     Year = 2017, 
                     Month = (MonthEn)1,

@@ -63,14 +63,20 @@ namespace Tree.Implementations.TreeNode
                 return this;
             }
         }
-        public override bool CanHasChildren { get; set; }
+        public override bool CanHasChildren 
+        { 
+            get
+            {
+                // Must be false after creating GroupOrder class
+                return _childNodes.Count > 0;
+            }
+        }
         #endregion Properties
        
         #region Methods
         public Order(bool canHasSubOrders = false)
         {
-            CanHasChildren = canHasSubOrders;
-            if (CanHasChildren)
+            if (canHasSubOrders)
                 AddNewChild();
         }
 
