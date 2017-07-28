@@ -42,7 +42,7 @@
 /ProfitController/bin/Debug/Tree.dll
 /ProfitController/bin/Debug/ProfitController.vshost.exe.manifest
 /.vs
-/DAOLayer/*.csproj
+
 /DAOLayer/bin/Debug/*.pdb
 /DAOLayer/bin/Debug/*.dll
 /DAOLayer/obj/Debug/*.cs
