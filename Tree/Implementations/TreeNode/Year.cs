@@ -22,10 +22,10 @@ namespace Tree.Implementations.TreeNode
         public Year(int val = 0)
         {
             Value = val;
-            AddNewChild();
-            AddNewChild();
-            AddNewChild();
-            AddNewChild();
+            AddChild();
+            AddChild();
+            AddChild();
+            AddChild();
         }
 
         public override ITreeNode CreateNewChild()

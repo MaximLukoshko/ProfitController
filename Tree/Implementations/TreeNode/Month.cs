@@ -49,14 +49,13 @@ namespace Tree.Implementations.TreeNode
         public Month(int month)
         {
             Value = (MonthEn) month;
-            AddNewChild();
-            AddNewChild();
-            AddNewChild();
+            AddChild();
+            AddChild();
+            AddChild();
         }
 
         public override ITreeNode CreateNewChild()
         {
-            // Must be GroupOrder class
             return  new Order(true) {
                     Year = 2017, 
                     Month = (MonthEn)1,

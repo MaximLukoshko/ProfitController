@@ -12,7 +12,7 @@ namespace Tree.Interfaces
 
 
         #region Methods
-        bool AddChildToNode(ITreeNode node);
+        bool AddChildToNode(ITreeNode node, ITreeNode childNode);
         bool RemoveNode(ITreeNode node);
         bool AddOrderToNode(ITreeNode node);
         bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine);

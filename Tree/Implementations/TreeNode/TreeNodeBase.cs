@@ -62,9 +62,9 @@ namespace Tree.Implementations.TreeNode
         #endregion Methods
 
 
-        public virtual bool AddNewChild()
+        public bool AddChild(ITreeNode child = null)
         {
-            var child = CreateNewChild();
+            child = child ?? CreateNewChild();
 
             if (child != null)
             {

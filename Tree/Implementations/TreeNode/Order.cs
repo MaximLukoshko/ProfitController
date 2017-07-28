@@ -67,7 +67,6 @@ namespace Tree.Implementations.TreeNode
         { 
             get
             {
-                // Must be false after creating GroupOrder class
                 return _childNodes.Count > 0;
             }
         }
@@ -77,7 +76,7 @@ namespace Tree.Implementations.TreeNode
         public Order(bool canHasSubOrders = false)
         {
             if (canHasSubOrders)
-                AddNewChild();
+                AddChild();
         }
 
         public override ITreeNode CreateNewChild()

@@ -1,5 +1,5 @@
-﻿//using DAOLayer.Implementations;
-//using DAOLayer.Interfaces;
+﻿using DAOLayer.Implementations;
+using DAOLayer.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
@@ -16,7 +16,7 @@ namespace ProfitController
     public partial class MainWindow : Window
     {
         private ITreeModel _model = new TreeModel();
-   //     private IDAO _dao = new DAO();
+        private IDAO _dao = new DAO();
         public ICollection<ITreeNode> Nodes 
         { 
             get
@@ -25,16 +25,19 @@ namespace ProfitController
             }
         }
 
-     /*   public IDAO DataAcsessObject
+        public IDAO DataAcsessObject
         {
             get
             {
                 return _dao;
             }
         }
-        */
+           
         public MainWindow()
         {
+            _dao.SaveModelToFile(_model, null);
+            _dao.LoadModelFromFile(_model, null);
+
             InitializeComponent();
 
             trw_Orders.ItemsSource = Nodes;
@@ -55,7 +58,7 @@ namespace ProfitController
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             if(sel!=null)
-                sel.AddNewChild();
+                sel.AddChild();
             UpdateWindow();
         }
 
@@ -75,6 +78,5 @@ namespace ProfitController
         {
             
         }
-
     }
 }

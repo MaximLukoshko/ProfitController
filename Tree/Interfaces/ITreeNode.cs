@@ -19,7 +19,8 @@ namespace Tree.Interfaces
         #endregion Properties
 
         #region Methods
-        bool AddNewChild();
+        ITreeNode CreateNewChild();
+        bool AddChild(ITreeNode child = null);
         bool RemoveThis();
         #endregion Methods
     }

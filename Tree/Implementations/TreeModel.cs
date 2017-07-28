@@ -23,14 +23,14 @@ namespace Tree.Implementations
         public TreeModel()
         {
             Root = new UndefinedTreeNode();
-            Root.AddNewChild();
-            Root.AddNewChild();
+            Root.AddChild();
+            Root.AddChild();
         }
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)
         {
             if(node != null)
-                node.AddNewChild();
+                node.AddChild();
             return true;
         }
 
@@ -46,9 +46,12 @@ namespace Tree.Implementations
             return true;
         }
 
-        public bool AddChildToNode(ITreeNode node)
+        public bool AddChildToNode(ITreeNode node, ITreeNode childNode)
         {
-            return true;
+            if (node == null)
+                return false;
+            childNode = childNode ?? node.CreateNewChild();
+            return childNode != null ? node.AddChild(childNode) : false;
         }
 
         public void InitModel(ITreeNode root)
