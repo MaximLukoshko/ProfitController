@@ -77,13 +77,11 @@ namespace Tree.Implementations.TreeNode
         public Order(bool canHasSubOrders = false)
         {
             _canHasChildren = canHasSubOrders;
-            if (CanHasChildren)
-                AddChild();
         }
 
         public override ITreeNode CreateNewChild()
         {
-            return new Order();
+            return new Order(true);
         }
 
 
