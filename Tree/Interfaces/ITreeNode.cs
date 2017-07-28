@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Tree.Interfaces
 {
@@ -24,6 +25,8 @@ namespace Tree.Interfaces
         bool RemoveThis();
         bool AddOrder();
         bool RemoveOrder(IOrderLine orderLine);
+        XDocument ToXDocument();
+        bool FromXDocument(XDocument doc);
         #endregion Methods
     }
 }

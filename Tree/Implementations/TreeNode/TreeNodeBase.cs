@@ -83,5 +83,16 @@ namespace Tree.Implementations.TreeNode
         {
             return true;
         }
+
+
+        public System.Xml.Linq.XDocument ToXDocument()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool FromXDocument(System.Xml.Linq.XDocument doc)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
