@@ -74,5 +74,14 @@ namespace Tree.Implementations.TreeNode
             
             return child != null;
         }
+        public bool AddOrder()
+        {
+            return true;
+        }
+
+        public bool RemoveOrder()
+        {
+            return true;
+        }
     }
 }

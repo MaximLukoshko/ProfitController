@@ -55,26 +55,32 @@ namespace ProfitController
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             if(sel!=null)
-                sel.AddNewChild();
+               _model.AddChildToNode(sel);
             UpdateWindow();
         }
 
         private void Row_Delete(object sender, RoutedEventArgs e)
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
-            sel.RemoveThis();
+            if(sel!=null)
+                _model.RemoveNode(sel);
             UpdateWindow();
         }
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
+            var sel = (ITreeNode)dgrd_Orders.SelectedItem;
+            if(sel!=null)
+                _model.AddOrderToNode(sel);
             
         }
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
         {
-            
+            var selNode = (ITreeNode)trw_Orders.SelectedItem;
+            var selLine = (IOrderLine)dgrd_Orders.SelectedItem;
+            if (selNode != null && selNode!=null)
+                _model.RemoveOrderFromNode(selNode, selLine);
         }
-
     }
 }

@@ -21,6 +21,8 @@ namespace Tree.Interfaces
         #region Methods
         bool AddNewChild();
         bool RemoveThis();
+        bool AddOrder();
+        bool RemoveOrder();
         #endregion Methods
     }
 }
