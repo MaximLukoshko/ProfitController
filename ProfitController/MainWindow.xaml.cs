@@ -29,6 +29,11 @@ namespace ProfitController
             trw_Orders.ItemsSource = Nodes;
         }
 
+        private void UpdateWindow()
+        {
+
+        }
+
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         { 
             var sel = (ITreeNode)trw_Orders.SelectedItem;
@@ -37,15 +42,16 @@ namespace ProfitController
 
         private void Row_Add(object sender, RoutedEventArgs e)
         {
-            //Подходит ли selecteditem?
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             sel.AddNewChild();
+            UpdateWindow();
         }
 
         private void Row_Delete(object sender, RoutedEventArgs e)
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             sel.RemoveThis();
+            UpdateWindow();
         }
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
@@ -57,5 +63,6 @@ namespace ProfitController
         {
             MessageBox.Show("I work");
         }
+
     }
 }

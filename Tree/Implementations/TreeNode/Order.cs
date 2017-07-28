@@ -28,7 +28,7 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
-        public virtual ICollection<ITreeNode> ChildNodes
+        public override ICollection<ITreeNode> ChildNodes
         {
             get
             {

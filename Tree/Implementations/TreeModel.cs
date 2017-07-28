@@ -26,5 +26,25 @@ namespace Tree.Implementations
             Root.AddNewChild();
             Root.AddNewChild();
         }
+
+        public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)
+        {
+            return true;
+        }
+
+        public bool AddOrderToNode(ITreeNode node)
+        {
+            return true;
+        }
+
+        public bool RemoveNode(ITreeNode node)
+        {
+            return true;
+        }
+
+        public bool AddChildToNode(ITreeNode node)
+        {
+            return true;
+        }
     }
 }
