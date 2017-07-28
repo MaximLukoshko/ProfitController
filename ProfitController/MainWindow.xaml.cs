@@ -1,5 +1,5 @@
-﻿using DAOLayer.Implementations;
-using DAOLayer.Interfaces;
+﻿//using DAOLayer.Implementations;
+//using DAOLayer.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
@@ -16,7 +16,7 @@ namespace ProfitController
     public partial class MainWindow : Window
     {
         private ITreeModel _model = new TreeModel();
-        private IDAO _dao = new DAO();
+   //     private IDAO _dao = new DAO();
         public ICollection<ITreeNode> Nodes 
         { 
             get
@@ -25,19 +25,24 @@ namespace ProfitController
             }
         }
 
-        public IDAO DataAcsessObject
+     /*   public IDAO DataAcsessObject
         {
             get
             {
                 return _dao;
             }
         }
-
+        */
         public MainWindow()
         {
             InitializeComponent();
 
             trw_Orders.ItemsSource = Nodes;
+        }
+
+        private void UpdateWindow()
+        {
+
         }
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -48,25 +53,28 @@ namespace ProfitController
 
         private void Row_Add(object sender, RoutedEventArgs e)
         {
-            //Подходит ли selecteditem?
             var sel = (ITreeNode)trw_Orders.SelectedItem;
-            sel.AddNewChild();
+            if(sel!=null)
+                sel.AddNewChild();
+            UpdateWindow();
         }
 
         private void Row_Delete(object sender, RoutedEventArgs e)
         {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
             sel.RemoveThis();
+            UpdateWindow();
         }
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("I work");
+            
         }
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("I work");
+            
         }
+
     }
 }
