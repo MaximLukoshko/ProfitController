@@ -17,5 +17,6 @@ namespace Tree.Interfaces
         bool AddOrderToNode(ITreeNode node);
         bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine);
         #endregion Methods
+        void InitModel(ITreeNode root);
     }
 }

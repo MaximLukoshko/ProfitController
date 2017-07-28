@@ -41,3 +41,14 @@
 /ProfitController/bin/Debug/Tree.pdb
 /ProfitController/bin/Debug/Tree.dll
 /ProfitController/bin/Debug/ProfitController.vshost.exe.manifest
+/.vs
+/DAOLayer/*.csproj
+/DAOLayer/bin/Debug/*.pdb
+/DAOLayer/bin/Debug/*.dll
+/DAOLayer/obj/Debug/*.cs
+/DAOLayer/obj/Debug/*.cache
+/DAOLayer/obj/Debug/*.pdb
+/DAOLayer/obj/Debug/*.dll
+/DAOLayer/obj/Debug/*.txt
+/ProfitController/bin/Debug/*.dll
+/ProfitController/bin/Debug/*.pdb

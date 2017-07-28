@@ -4,7 +4,7 @@ using Tree.BaseEnums;
 using Tree.Interfaces;
 namespace Tree.Implementations.TreeNode
 {
-    public class Order : TreeNodeBase, IOrderLine
+    public class Order : TreeNodeBase, IOrder
     {
         #region Properties
         
@@ -45,19 +45,38 @@ namespace Tree.Implementations.TreeNode
             get
             {
                 var ret = new List<IOrderLine>();
-                ret.Add(this);
-                ret.AddRange(base.Orders);
+                foreach (var child in _childNodes)
+                {
+                    var ord = child as IOrder;
+                    if (ord != null)
+                        ret.Add(ord.Order);
+                    else
+                        ret.AddRange(ord.Orders);
+                }
                 return ret;
             }
         }
-        public override bool CanHasChildren { get; set; }
+        IOrderLine IOrder.Order
+        {
+            get
+            { 
+                return this;
+            }
+        }
+        public override bool CanHasChildren 
+        { 
+            get
+            {
+                // Must be false after creating GroupOrder class
+                return _childNodes.Count > 0;
+            }
+        }
         #endregion Properties
        
         #region Methods
         public Order(bool canHasSubOrders = false)
         {
-            CanHasChildren = canHasSubOrders;
-            if (CanHasChildren)
+            if (canHasSubOrders)
                 AddNewChild();
         }
 

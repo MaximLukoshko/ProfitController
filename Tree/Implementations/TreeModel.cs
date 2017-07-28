@@ -46,5 +46,14 @@ namespace Tree.Implementations
         {
             return true;
         }
+
+        public void InitModel(ITreeNode root)
+        {
+            if(root !=null)
+            {
+                Root = null;
+                Root = root;
+            }
+        }
     }
 }

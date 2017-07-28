@@ -43,10 +43,6 @@ namespace Tree.Implementations.TreeNode
             {
                 return true;
             }
-            set
-            {
-
-            }
         }
         #endregion Properties
 

@@ -44,6 +44,7 @@
     <Compile Include="Implementations\TreeModel.cs" />
     <Compile Include="Implementations\TreeNode\TreeNodeBase.cs" />
     <Compile Include="Implementations\TreeNode\UndefinedTreeNode.cs" />
+    <Compile Include="Interfaces\IOrder.cs" />
     <Compile Include="Interfaces\IOrderLine.cs" />
     <Compile Include="Interfaces\ITreeModel.cs" />
     <Compile Include="Interfaces\ITreeNode.cs" />

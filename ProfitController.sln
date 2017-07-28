@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitController", "ProfitC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tree", "Tree\Tree.csproj", "{8B076BD3-E26B-43F9-82E4-FC7CA0E9874C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAOLayer", "DAOLayer\DAOLayer.csproj", "{F3CC434E-F6EF-4ECE-9A62-E4D99A754F9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{8B076BD3-E26B-43F9-82E4-FC7CA0E9874C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B076BD3-E26B-43F9-82E4-FC7CA0E9874C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B076BD3-E26B-43F9-82E4-FC7CA0E9874C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3CC434E-F6EF-4ECE-9A62-E4D99A754F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CC434E-F6EF-4ECE-9A62-E4D99A754F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CC434E-F6EF-4ECE-9A62-E4D99A754F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CC434E-F6EF-4ECE-9A62-E4D99A754F9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
