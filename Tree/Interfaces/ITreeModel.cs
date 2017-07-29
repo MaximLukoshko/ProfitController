@@ -9,7 +9,7 @@ namespace Tree.Interfaces
     public interface ITreeModel
     {
         ICollection<ITreeNode> Nodes { get; }
-
+        ITreeNode Root { get; }
 
         #region Methods
         bool AddChildToNode(ITreeNode node, ITreeNode childNode = null);

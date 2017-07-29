@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Tree.BaseEnums;
 using Tree.Interfaces;
 
 namespace Tree.Implementations.TreeNode
@@ -84,13 +86,20 @@ namespace Tree.Implementations.TreeNode
             return true;
         }
 
+        public ICollection<ITreeNode> AllChilds
+        {
+            get 
+            {
+                return _childNodes;
+            }
+        }
 
-        public System.Xml.Linq.XDocument ToXDocument()
+        public XElement ToXElement()
         {
             throw new NotImplementedException();
         }
 
-        public bool FromXDocument(System.Xml.Linq.XDocument doc)
+        public bool FromXElement(XElement elem)
         {
             throw new NotImplementedException();
         }

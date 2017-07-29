@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Tree.BaseEnums;
 
 namespace Tree.Interfaces
 {
@@ -20,13 +21,14 @@ namespace Tree.Interfaces
         #endregion Properties
 
         #region Methods
+        ICollection<ITreeNode> AllChilds { get; }
+        XElement ToXElement();
+        bool FromXElement(XElement elem);
         ITreeNode CreateNewChild();
         bool AddChild(ITreeNode child = null);
         bool RemoveThis();
         bool AddOrder();
         bool RemoveOrder(IOrderLine orderLine);
-        XDocument ToXDocument();
-        bool FromXDocument(XDocument doc);
         #endregion Methods
     }
 }

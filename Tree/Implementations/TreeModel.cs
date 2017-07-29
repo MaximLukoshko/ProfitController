@@ -18,7 +18,7 @@ namespace Tree.Implementations
             }
         }
 
-        private ITreeNode Root { get; set; }
+        public ITreeNode Root { get; set; }
 
         public TreeModel()
         {
