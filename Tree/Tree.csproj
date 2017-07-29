@@ -40,7 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEnums.cs" />
-    <Compile Include="Implementations\OrderLine\OrderLine.cs" />
     <Compile Include="Implementations\TreeModel.cs" />
     <Compile Include="Implementations\TreeNode\TreeNodeBase.cs" />
     <Compile Include="Implementations\TreeNode\UndefinedTreeNode.cs" />
