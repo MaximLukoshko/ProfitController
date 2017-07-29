@@ -19,7 +19,7 @@ namespace Tree.Implementations.TreeNode
 
         public override ITreeNode CreateNewChild()
         {
-            return new Year();
+            return new Year(2016);
         }
     }
 }

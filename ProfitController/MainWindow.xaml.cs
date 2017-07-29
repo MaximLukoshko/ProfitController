@@ -35,8 +35,8 @@ namespace ProfitController
            
         public MainWindow()
         {
-            _dao.SaveModelToFile(_model, null);
-            _dao.LoadModelFromFile(_model, null);
+            //_dao.SaveModelToFile(_model, @"Test.xml");
+            //_dao.LoadModelFromFile(_model, @"Test.xml");
 
             InitializeComponent();
 

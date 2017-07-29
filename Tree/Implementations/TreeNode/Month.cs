@@ -46,12 +46,17 @@ namespace Tree.Implementations.TreeNode
             Value = val;
         }
 
-        public Month(int month)
+        public Month(int month = 0)
         {
             Value = (MonthEn) month;
             AddChild();
             AddChild();
             AddChild();
+        }
+
+        public Month()
+        {
+
         }
 
         public override ITreeNode CreateNewChild()

@@ -79,6 +79,11 @@ namespace Tree.Implementations.TreeNode
             _canHasChildren = canHasSubOrders;
         }
 
+        public Order()
+        {
+
+        }
+
         public override ITreeNode CreateNewChild()
         {
             return new Order(true);

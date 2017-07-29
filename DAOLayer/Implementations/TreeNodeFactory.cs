@@ -20,7 +20,7 @@ namespace DAOLayer.Implementations
 
         public static string GetTypeFromElement(ITreeNode elem)
         {
-            return elem != null ? elem.GetType().ToString() : string.Empty;
+            return elem != null ? elem.GetType().AssemblyQualifiedName : string.Empty;
         }
     }
 }

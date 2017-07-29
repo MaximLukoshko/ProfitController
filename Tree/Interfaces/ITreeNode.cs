@@ -8,6 +8,9 @@ using Tree.BaseEnums;
 
 namespace Tree.Interfaces
 {
+    // !!! ATTENTION !!! //
+    // Each class, that implements this interface must have public default constructor
+    // !!! ATTENTION !!! //
     public interface ITreeNode
     {
         #region Properties
@@ -21,7 +24,7 @@ namespace Tree.Interfaces
         #endregion Properties
 
         #region Methods
-        ICollection<ITreeNode> AllChilds { get; }
+        ICollection<ITreeNode> AllChildren { get; }
         XElement ToXElement();
         bool FromXElement(XElement elem);
         ITreeNode CreateNewChild();

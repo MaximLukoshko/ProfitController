@@ -28,6 +28,10 @@ namespace Tree.Implementations.TreeNode
             AddChild();
         }
 
+        public Year()
+        {
+        }
+
         public override ITreeNode CreateNewChild()
         {
             return ChildNodes.Count < 12 ? new Month(ChildNodes.Count) : null;

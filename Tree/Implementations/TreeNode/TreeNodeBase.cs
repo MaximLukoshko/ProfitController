@@ -86,7 +86,7 @@ namespace Tree.Implementations.TreeNode
             return true;
         }
 
-        public ICollection<ITreeNode> AllChilds
+        public ICollection<ITreeNode> AllChildren
         {
             get 
             {
@@ -96,7 +96,7 @@ namespace Tree.Implementations.TreeNode
 
         public XElement ToXElement()
         {
-            throw new NotImplementedException();
+            return new XElement("Item", new XElement("NodeName", NodeName));
         }
 
         public bool FromXElement(XElement elem)
