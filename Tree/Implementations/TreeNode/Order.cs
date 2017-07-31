@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Tree.BaseEnums;
 using Tree.Interfaces;
 namespace Tree.Implementations.TreeNode
 {
     public class Order : TreeNodeBase, IOrder
     {
+        private const string YEAR = @"Year";
+        private const string MONTH = @"Month";
+        private const string DAY = @"Day";
+        private const string DEVICE_NAME = @"DeviceName";
+        private const string ADDRESS = @"Address";
+        private const string PHONE = @"Phone";
+        private const string JOBTYPE = @"JobType";
+        private const string INSTALLED_DETAILS = @"InstalledDetails";
+        private const string INCOME = @"Income";
+        private const string OUTGO = @"OutGo";
+        private const string CAN_HAVE_CHILDREN = @"CanHaveChildren";
         #region Properties
         
         #region IOrderLine
@@ -91,5 +103,27 @@ namespace Tree.Implementations.TreeNode
 
 
         #endregion Methods
+
+        public override XElement ToXElement()
+        {
+            return new XElement("Item", 
+                new XElement(YEAR, Year),
+                new XElement(MONTH, Month),
+                new XElement(DAY, Day),
+                new XElement(DEVICE_NAME, DeviceName),
+                new XElement(ADDRESS, Address),
+                new XElement(PHONE, Phone),
+                new XElement(JOBTYPE, JobType),
+                new XElement(INSTALLED_DETAILS, InstalledDetails),
+                new XElement(INCOME, Income),
+                new XElement(OUTGO, Outgo),
+                new XElement(CAN_HAVE_CHILDREN, _canHasChildren)
+                );
+        }
+
+        public override bool FromXElement(XElement elem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

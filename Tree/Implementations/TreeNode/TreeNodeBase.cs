@@ -94,14 +94,14 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
-        public XElement ToXElement()
-        {
-            return new XElement("Item", new XElement("NodeName", NodeName));
-        }
+        public abstract XElement ToXElement();
+//         {
+//             return new XElement("Item", new XElement("NodeName", NodeName));
+//         }
 
-        public bool FromXElement(XElement elem)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool FromXElement(XElement elem);
+//         {
+//             throw new NotImplementedException();
+//         }
     }
 }

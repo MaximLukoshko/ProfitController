@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Tree.BaseEnums;
 using Tree.Interfaces;
 
@@ -7,7 +8,7 @@ namespace Tree.Implementations.TreeNode
 {
     public class Month : TreeNodeBase
     {
-       
+        private const string MONTH = @"Month";
         #region Properties
         public MonthEn Value { get; set; }
 
@@ -76,5 +77,15 @@ namespace Tree.Implementations.TreeNode
         }
 
         #endregion Methods
+
+        public override XElement ToXElement()
+        {
+            return new XElement("Item", new XElement(MONTH, Value));
+        }
+
+        public override bool FromXElement(XElement elem)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
