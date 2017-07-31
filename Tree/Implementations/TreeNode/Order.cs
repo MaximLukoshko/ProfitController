@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Tree.BaseEnums;
 using Tree.Interfaces;
+using System.Linq;
+
 namespace Tree.Implementations.TreeNode
 {
     public class Order : TreeNodeBase, IOrder
@@ -123,7 +125,37 @@ namespace Tree.Implementations.TreeNode
 
         public override bool FromXElement(XElement elem)
         {
-            throw new NotImplementedException();
+            int year = -1;
+            int.TryParse(elem.Elements(YEAR).FirstOrDefault().Value, out year);
+            Year = year;
+            
+            MonthEn month = 0;
+            Enum.TryParse<MonthEn>(elem.Elements(MONTH).FirstOrDefault().Value, out month);
+            Month = month;
+
+            int day = -1;
+            int.TryParse(elem.Elements(DAY).FirstOrDefault().Value, out day);
+            Day = day;
+
+            DeviceName = elem.Elements(DEVICE_NAME).FirstOrDefault().Value;
+            Address = elem.Elements(ADDRESS).FirstOrDefault().Value;
+            Phone = elem.Elements(PHONE).FirstOrDefault().Value;
+            JobType = elem.Elements(JOBTYPE).FirstOrDefault().Value;
+            InstalledDetails = elem.Elements(INSTALLED_DETAILS).FirstOrDefault().Value;
+
+            int income = -1;
+            int.TryParse(elem.Elements(INCOME).FirstOrDefault().Value, out income);
+            Income = income;
+
+            int outgo = -1;
+            int.TryParse(elem.Elements(OUTGO).FirstOrDefault().Value, out outgo);
+            Outgo = outgo;
+
+            bool canhavechildren = false;
+            bool.TryParse(elem.Elements(CAN_HAVE_CHILDREN).FirstOrDefault().Value, out canhavechildren);
+            _canHasChildren = canhavechildren;
+
+            return true;
         }
     }
 }

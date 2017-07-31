@@ -23,8 +23,8 @@ namespace Tree.Implementations
         public TreeModel()
         {
             Root = new UndefinedTreeNode();
-            Root.AddChild();
-            Root.AddChild();
+//             Root.AddChild();
+//             Root.AddChild();
         }
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)

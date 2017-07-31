@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using Tree.Interfaces;
+using System;
+using System.Linq;
+
 
 namespace Tree.Implementations.TreeNode
 {
@@ -47,7 +50,10 @@ namespace Tree.Implementations.TreeNode
 
         public override bool FromXElement(XElement elem)
         {
-            throw new System.NotImplementedException();
+            int val = -1;
+            int.TryParse(elem.Elements(YEAR).FirstOrDefault().Value, out val);
+            Value = val;
+            return true;
         }
     }
 }
