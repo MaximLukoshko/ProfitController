@@ -1,5 +1,6 @@
 ﻿using DAOLayer.Implementations;
 using DAOLayer.Interfaces;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
@@ -35,8 +36,8 @@ namespace ProfitController
            
         public MainWindow()
         {
-            //_dao.SaveModelToFile(_model, @"Test.xml");
-            //_dao.LoadModelFromFile(_model, @"Test.xml");
+            _dao.SaveModelToFile(_model, @"Test.xml");
+            _dao.LoadModelFromFile(_model, @"Test.xml");
 
             InitializeComponent();
 
@@ -101,7 +102,16 @@ namespace ProfitController
 
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
-
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "xml documents (.xml)|*.xml";
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+               // ??Загрузить файл
+                UpdateWindow();
+            }
         }
 
         private void Save_BtnClick(object sender, RoutedEventArgs e)
@@ -111,7 +121,31 @@ namespace ProfitController
 
         private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Таблица";
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "xml documents (.xml)|*.xml";
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                //сохранение
+                
+                if (true) //если сохранено
+                {
+                    MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
 
+        private void Close_BtnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (dialogResult == MessageBoxResult.Yes)
+                this.Close();
         }
     }
 }
