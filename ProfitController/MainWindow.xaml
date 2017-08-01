@@ -5,12 +5,24 @@
         Title="MainWindow" Height="Auto" Width="Auto" MinWidth="300" MinHeight="100">
     <Grid Margin="0" Height="Auto" Width="Auto">
         
+      
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="Tree" Width="Auto"></ColumnDefinition>
             <ColumnDefinition Name="Info" Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <TreeView Name="trw_Orders" DataContext="{Binding Nodes}" Margin="5" Width="Auto" MinWidth="150" Grid.Column="0" MouseLeftButtonUp="treeItem_MouseLeftButtonUp">
+            <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="20" VerticalAlignment="Top">
+            <MenuItem Header="_Файл" >
+                <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Click="Open_BtnClick"/>
+                <MenuItem Header="_Сохранить" HorizontalAlignment="Stretch" Click="Save_BtnClick"/>
+                <MenuItem Header="_Сохранить как..." HorizontalAlignment="Stretch" Click="SaveAs_BtnClick"/>
+                <Separator/>
+                <MenuItem Header="_Выход" HorizontalAlignment="Stretch"/>
+            </MenuItem>
+        </Menu>
+
+            <TreeView Name="trw_Orders" DataContext="{Binding Nodes}" Margin="5,25,5,5" Width="Auto" MinWidth="150" Grid.Column="0" MouseLeftButtonUp="treeItem_MouseLeftButtonUp">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}">
                     <TextBlock Text="{Binding NodeName}" Margin="0,0,7,0">
@@ -25,13 +37,12 @@
             </TreeView.ItemTemplate>
         </TreeView>
 
-        <DataGrid Name="dgrd_Orders"  Width="Auto" Margin="5" Grid.Column="1" AutoGenerateColumns="False">
+        <DataGrid Name="dgrd_Orders"  Width="Auto" Margin="5,25,5,5" Grid.Column="1" AutoGenerateColumns="False">
             
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Добавить" HorizontalAlignment="Stretch" Click="AddToGrid_Click"/>
                     <MenuItem Header="Удалить" HorizontalAlignment="Stretch" Click="DeleteFromGrid_Click"/>
-                    <!--<MenuItem Name="ContextMenuInsert" Header="_Вставить" HorizontalAlignment="Stretch"/>-->
                 </ContextMenu>
             </DataGrid.ContextMenu>
             

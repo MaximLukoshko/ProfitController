@@ -62,7 +62,8 @@ namespace ProfitController
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         { 
             var sel = (ITreeNode)trw_Orders.SelectedItem;
-            dgrd_Orders.ItemsSource = sel.Orders;
+            if(sel!=null)
+                dgrd_Orders.ItemsSource = sel.Orders;
         }
 
         private void Row_Add(object sender, RoutedEventArgs e)
@@ -96,6 +97,21 @@ namespace ProfitController
             if (selNode != null && selNode!=null)
                 _model.RemoveOrderFromNode(selNode, selLine);
             UpdateOrdersView();
+        }
+
+        private void Open_BtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Save_BtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
