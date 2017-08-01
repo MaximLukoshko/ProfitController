@@ -83,7 +83,7 @@ namespace ProfitController
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode)dgrd_Orders.SelectedItem;
+            var sel = (ITreeNode)trw_Orders.SelectedItem;
             if(sel!=null)
                 _model.AddOrderToNode(sel);
             UpdateOrdersView();

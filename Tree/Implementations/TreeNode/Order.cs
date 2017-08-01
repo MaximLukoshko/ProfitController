@@ -41,19 +41,6 @@ namespace Tree.Implementations.TreeNode
                 return string.Format("{0}: {1}", Day, DeviceName);
             }
         }
-
-        public override ICollection<ITreeNode> ChildNodes
-        {
-            get
-            {
-                var ret = new List<ITreeNode>();
-                foreach (var child in _childNodes)
-                    if (child.CanHasChildren)
-                        ret.Add(child);
-                return ret;
-            }
-        }
-
         public override ICollection<IOrderLine> Orders
         {
             get
@@ -156,6 +143,10 @@ namespace Tree.Implementations.TreeNode
             _canHasChildren = canhavechildren;
 
             return true;
+        }
+        public override bool AddOrder()
+        {
+            return AddChild(new Order());
         }
     }
 }

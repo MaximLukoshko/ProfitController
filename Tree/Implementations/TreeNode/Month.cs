@@ -26,17 +26,16 @@ namespace Tree.Implementations.TreeNode
             get
             {
                 var ret = new List<IOrderLine>();
-                foreach (var child in ChildNodes)
+                foreach (var child in _childNodes)
                 {
                     var ord = child as IOrder;
-                    if (ord != null && ord.CanHasChildren)
+                    if (ord != null)
                         ret.Add(ord.Order);
-                    else
-                        ret.AddRange(ord.Orders);
                 }
                 return ret;
             }
         }
+
         #endregion Properties
 
         #region Methods
@@ -90,6 +89,11 @@ namespace Tree.Implementations.TreeNode
             Enum.TryParse<MonthEn>(elem.Elements(MONTH).FirstOrDefault().Value, out val);
             Value = val;
             return true;
+        }
+
+        public override bool AddOrder()
+        {
+            return AddChild(new Order());
         }
     }
 }

@@ -35,7 +35,11 @@ namespace Tree.Implementations.TreeNode
         { 
             get
             {
-                return _childNodes;
+                var ret = new List<ITreeNode>();
+                foreach (var child in _childNodes)
+                    if (child.CanHasChildren)
+                        ret.Add(child);
+                return ret;
             } 
         }
 
@@ -76,12 +80,12 @@ namespace Tree.Implementations.TreeNode
             
             return child != null;
         }
-        public bool AddOrder()
+        public virtual bool AddOrder()
         {
             return false;
         }
 
-        public bool RemoveOrder(IOrderLine orderLine)
+        public virtual bool RemoveOrder(IOrderLine orderLine)
         {
             var order = orderLine as IOrder;
             if(order!=null)
