@@ -45,7 +45,18 @@ namespace ProfitController
 
         private void UpdateWindow()
         {
+            trw_Orders.ItemsSource = null;
+            trw_Orders.ItemsSource = _model.Nodes;
 
+            UpdateOrdersView();
+        }
+
+        private void UpdateOrdersView()
+        {
+            dgrd_Orders.ItemsSource = null;
+            var sel = trw_Orders.SelectedItem as ITreeNode;
+            if (sel != null)
+                dgrd_Orders.ItemsSource = sel.Orders;
         }
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -75,7 +86,7 @@ namespace ProfitController
             var sel = (ITreeNode)dgrd_Orders.SelectedItem;
             if(sel!=null)
                 _model.AddOrderToNode(sel);
-            
+            UpdateOrdersView();
         }
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
@@ -84,6 +95,7 @@ namespace ProfitController
             var selLine = (IOrderLine)dgrd_Orders.SelectedItem;
             if (selNode != null && selNode!=null)
                 _model.RemoveOrderFromNode(selNode, selLine);
+            UpdateOrdersView();
         }
     }
 }

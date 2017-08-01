@@ -78,12 +78,22 @@ namespace Tree.Implementations.TreeNode
         }
         public bool AddOrder()
         {
-            return true;
+            return false;
         }
 
         public bool RemoveOrder(IOrderLine orderLine)
         {
-            return true;
+            var order = orderLine as IOrder;
+            if(order!=null)
+            {
+                if(_childNodes.Contains(order))
+                    return _childNodes.Remove(order);
+
+                foreach (var ch in _childNodes)
+                    if (ch.RemoveOrder(orderLine))
+                        return true;
+            }
+            return false;
         }
 
         public ICollection<ITreeNode> AllChildren
@@ -95,13 +105,6 @@ namespace Tree.Implementations.TreeNode
         }
 
         public abstract XElement ToXElement();
-//         {
-//             return new XElement("Item", new XElement("NodeName", NodeName));
-//         }
-
         public abstract bool FromXElement(XElement elem);
-//         {
-//             throw new NotImplementedException();
-//         }
     }
 }
