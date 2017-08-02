@@ -10,7 +10,6 @@ namespace Tree.Implementations.TreeNode
     public class Month : TreeNodeBase
     {
         private const string MONTH = @"Month";
-        #region Properties
         public MonthEn Value { get; set; }
 
         public override string NodeName
@@ -35,10 +34,6 @@ namespace Tree.Implementations.TreeNode
                 return ret;
             }
         }
-
-        #endregion Properties
-
-        #region Methods
 
         public Month(string month)
         {
@@ -75,8 +70,6 @@ namespace Tree.Implementations.TreeNode
                     Outgo =500
                 };
         }
-
-        #endregion Methods
 
         public override XElement ToXElement()
         {

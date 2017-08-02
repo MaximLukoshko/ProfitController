@@ -11,12 +11,10 @@ namespace Tree.Interfaces
         ICollection<ITreeNode> Nodes { get; }
         ITreeNode Root { get;}
 
-        #region Methods
         bool AddChildToNode(ITreeNode node, ITreeNode childNode = null);
         bool RemoveNode(ITreeNode node);
         bool AddOrderToNode(ITreeNode node);
         bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine);
-        #endregion Methods
         void InitModel(ITreeNode root);
     }
 }

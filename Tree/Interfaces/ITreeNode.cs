@@ -13,7 +13,6 @@ namespace Tree.Interfaces
     // !!! ATTENTION !!! //
     public interface ITreeNode
     {
-        #region Properties
 
         string NodeName { get; }
         ICollection<IOrderLine> Orders { get; }
@@ -21,9 +20,7 @@ namespace Tree.Interfaces
         ICollection<ITreeNode> ChildNodes { get; }
         ITreeNode Parent { get; set; }
         bool CanHasChildren { get; }
-        #endregion Properties
 
-        #region Methods
         ICollection<ITreeNode> AllChildren { get; }
         XElement ToXElement();
         bool FromXElement(XElement elem);
@@ -32,6 +29,5 @@ namespace Tree.Interfaces
         bool RemoveThis();
         bool AddOrder();
         bool RemoveOrder(IOrderLine orderLine);
-        #endregion Methods
     }
 }

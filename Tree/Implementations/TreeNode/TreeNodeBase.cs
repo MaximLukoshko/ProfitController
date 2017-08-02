@@ -10,10 +10,9 @@ namespace Tree.Implementations.TreeNode
     {
         protected TreeNodeBase()
         {
-            AllChildren = new List<ITreeNode>();;
+            AllChildren = new List<ITreeNode>();
         }
 
-        #region Properties
         public abstract string NodeName { get; }
         public virtual ICollection<IOrderLine> Orders 
         { 
@@ -48,11 +47,9 @@ namespace Tree.Implementations.TreeNode
                 return true;
             }
         }
-        #endregion Properties
 
         public ICollection<ITreeNode> AllChildren { get; private set; }
         public virtual ITreeNode Parent { get; set; }
-        #region Methods
         public virtual ITreeNode CreateNewChild()
         {
             return null;
@@ -63,9 +60,6 @@ namespace Tree.Implementations.TreeNode
             var parent = Parent;
             return parent != null && parent.AllChildren.Remove(this);
         }
-        #endregion Methods
-
-
         public bool AddChild(ITreeNode child = null)
         {
             child = child ?? CreateNewChild();

@@ -9,7 +9,6 @@ namespace Tree.Implementations.TreeNode
     public class Year : TreeNodeBase
     {
         private const string YEAR = @"Year";
-        #region Properties
         private int Value { get; set; }
         public override string NodeName
         {
@@ -18,9 +17,6 @@ namespace Tree.Implementations.TreeNode
                 return Value.ToString();
             }
         }
-        #endregion Properties
-
-        #region Methods
 
         public Year(int val = 0)
         {
@@ -39,7 +35,6 @@ namespace Tree.Implementations.TreeNode
         {
             return ChildNodes.Count < 12 ? new Month(ChildNodes.Count) : null;
         }
-        #endregion Methods
 
         public override XElement ToXElement()
         {

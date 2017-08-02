@@ -20,7 +20,6 @@ namespace Tree.Implementations.TreeNode
         private const string INCOME = @"Income";
         private const string OUTGO = @"OutGo";
         private const string CAN_HAVE_CHILDREN = @"CanHaveChildren";
-        #region Properties
         
         #region IOrderLine
         public int Year { get; set; }
@@ -71,7 +70,6 @@ namespace Tree.Implementations.TreeNode
                 return _canHasChildren;
             }
         }
-        #endregion Properties
         private bool _canHasChildren = false;
 
         #region Methods
