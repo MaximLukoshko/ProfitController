@@ -133,7 +133,7 @@ namespace ProfitController
 
         private void Save_BtnClick(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(_filename))
+            if (!string.IsNullOrEmpty(_filename))
             {
                 if (_dao.SaveModelToFile(_model, _filename))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
