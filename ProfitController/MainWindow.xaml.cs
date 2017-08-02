@@ -35,7 +35,6 @@ namespace ProfitController
         public MainWindow()
         {
             InitializeComponent();
-
             trw_Orders.ItemsSource = Nodes;
         }
 
@@ -95,8 +94,8 @@ namespace ProfitController
             UpdateOrdersView();
         }
 
-        private string _filename;
-        private void Open_BtnClick(object sender, RoutedEventArgs e)
+        private string _filename = string.Empty;
+        private string ChooseOpenFile_dlg()
         {
             var dlg = new OpenFileDialog
             {
@@ -105,16 +104,36 @@ namespace ProfitController
                 Filter = "(.pcm)|*.pcm"
             };
             if (dlg.ShowDialog() == true)
+                return dlg.FileName;
+            else return string.Empty;
+        }
+        private string ChooseSaveFile_dlg()
+        {
+            var dlg = new SaveFileDialog
             {
-                _dao.LoadModelFromFile(_model, dlg.FileName);
-                _filename = dlg.FileName;
+                FileName = "",
+                DefaultExt = ".pcm",
+                Filter = "(.pcm)|*.pcm"
+            };
+            if (dlg.ShowDialog() == true)
+                return dlg.FileName;
+            else return string.Empty;
+        }
+
+        private void Open_BtnClick(object sender, RoutedEventArgs e)
+        {
+            var path = ChooseOpenFile_dlg();
+                if (!string.IsNullOrEmpty(path))
+            {
+                _dao.LoadModelFromFile(_model, path);
+                _filename = path;
                 UpdateWindow();
             }
         }
 
         private void Save_BtnClick(object sender, RoutedEventArgs e)
         {
-            if (_filename != null)
+            if (string.IsNullOrEmpty(_filename))
             {
                 if (_dao.SaveModelToFile(_model, _filename))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -126,15 +145,9 @@ namespace ProfitController
 
         private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
         {
-            var dlg = new SaveFileDialog
+            var path = ChooseSaveFile_dlg();
             {
-                FileName = "Таблица",
-                DefaultExt = ".pcm",
-                Filter = "(.pcm)|*.pcm"
-            };
-            if (dlg.ShowDialog() == true)
-            {
-                if (_dao.SaveModelToFile(_model,dlg.FileName))
+                if (_dao.SaveModelToFile(_model,path))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
                     MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -146,6 +159,18 @@ namespace ProfitController
             MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
                 Close();
+        }
+
+        private void TrwSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            var path = ChooseSaveFile_dlg();
+            var selNode = (ITreeNode)trw_Orders.SelectedItem;
+            {
+                if (_dao.SaveNodeToFile(selNode, path))
+                    MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                    MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

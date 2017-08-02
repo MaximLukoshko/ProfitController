@@ -19,7 +19,7 @@ namespace DAOLayer.Implementations
         public bool SaveModelToFile(ITreeModel model, string filename)
         {
             XDocument doc = new XDocument(NodeToXElement(model.Root));
-            if(filename != null)
+            if(!string.IsNullOrEmpty(filename))
                 doc.Save(filename);
             return true;
         }

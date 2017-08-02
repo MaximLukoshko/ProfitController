@@ -30,6 +30,7 @@
                             <ContextMenu>
                                 <MenuItem Header="Добавить" Command="{Binding Command}" Click="Row_Add"/>
                                 <MenuItem Header="Удалить" Command="{Binding Command}" Click="Row_Delete"/>
+                                <MenuItem Header="Сохранить в файл" Command="{Binding Command}" Click="TrwSaveAs_Click"/>
                             </ContextMenu>
                         </TextBlock.ContextMenu>
                     </TextBlock>
