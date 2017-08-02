@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Tree.Implementations.TreeNode;
 using Tree.Interfaces;
 
@@ -23,23 +19,21 @@ namespace Tree.Implementations
         public TreeModel()
         {
             Root = new UndefinedTreeNode();
-//             Root.AddChild();
-//             Root.AddChild();
         }
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)
         {
-            return node != null ? node.RemoveOrder(orderLine) : false;
+            return node != null && node.RemoveOrder(orderLine);
         }
 
         public bool AddOrderToNode(ITreeNode node)
         {
-            return node != null ? node.AddOrder() : false;
+            return node != null && node.AddOrder();
         }
 
         public bool RemoveNode(ITreeNode node)
         {
-            return node != null ? node.RemoveThis() : false; ;
+            return node != null && node.RemoveThis();
         }
 
         public bool AddChildToNode(ITreeNode node, ITreeNode childNode = null)
@@ -51,11 +45,7 @@ namespace Tree.Implementations
 
         public void InitModel(ITreeNode root)
         {
-            if(root !=null)
-            {
-                Root = null;
-                Root = root;
-            }
+            Root = root ?? Root;
         }
     }
 }

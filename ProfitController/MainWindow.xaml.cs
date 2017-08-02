@@ -1,12 +1,10 @@
 ﻿using DAOLayer.Implementations;
 using DAOLayer.Interfaces;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
 using Tree.Implementations;
-using Tree.Implementations.TreeNode;
 using Tree.Interfaces;
 
 namespace ProfitController
@@ -14,10 +12,10 @@ namespace ProfitController
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        private ITreeModel _model = new TreeModel();
-        private IDAO _dao = new DAO();
+        private readonly ITreeModel _model = new TreeModel();
+        private readonly IDAO _dao = new DAO();
         public ICollection<ITreeNode> Nodes 
         { 
             get
@@ -36,9 +34,6 @@ namespace ProfitController
            
         public MainWindow()
         {
-            _dao.SaveModelToFile(_model, @"Test.xml");
-            _dao.LoadModelFromFile(_model, @"Test.xml");
-
             InitializeComponent();
 
             trw_Orders.ItemsSource = Nodes;
@@ -95,21 +90,22 @@ namespace ProfitController
         {
             var selNode = (ITreeNode)trw_Orders.SelectedItem;
             var selLine = (IOrderLine)dgrd_Orders.SelectedItem;
-            if (selNode != null && selNode!=null)
+            if (selNode != null)
                 _model.RemoveOrderFromNode(selNode, selLine);
             UpdateOrdersView();
         }
 
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "";
-            dlg.DefaultExt = ".xml";
-            dlg.Filter = "xml documents (.xml)|*.xml";
-            Nullable<bool> result = dlg.ShowDialog();
-            if (result == true)
+            var dlg = new OpenFileDialog
             {
-               // ??Загрузить файл
+                FileName = "",
+                DefaultExt = ".xml",
+                Filter = "xml documents (.xml)|*.xml"
+            };
+            if (dlg.ShowDialog() == true)
+            {
+                _dao.LoadModelFromFile(_model, dlg.FileName);
                 UpdateWindow();
             }
         }
@@ -121,23 +117,18 @@ namespace ProfitController
 
         private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Таблица";
-            dlg.DefaultExt = ".xml";
-            dlg.Filter = "xml documents (.xml)|*.xml";
-            Nullable<bool> result = dlg.ShowDialog();
-            if (result == true)
+            var dlg = new SaveFileDialog
             {
-                //сохранение
-                
-                if (true) //если сохранено
-                {
+                FileName = "Таблица",
+                DefaultExt = ".xml",
+                Filter = "xml documents (.xml)|*.xml"
+            };
+            if (dlg.ShowDialog() == true)
+            {
+                if (_dao.SaveModelToFile(_model,dlg.FileName))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
                 else
-                {
                     MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 
@@ -145,7 +136,7 @@ namespace ProfitController
         {
             MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
-                this.Close();
+                Close();
         }
     }
 }
