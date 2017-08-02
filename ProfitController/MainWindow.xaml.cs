@@ -100,8 +100,8 @@ namespace ProfitController
             var dlg = new OpenFileDialog
             {
                 FileName = "",
-                DefaultExt = ".xml",
-                Filter = "xml documents (.xml)|*.xml"
+                DefaultExt = ".pcm",
+                Filter = "(.pcm)|*.pcm"
             };
             if (dlg.ShowDialog() == true)
             {
@@ -120,8 +120,8 @@ namespace ProfitController
             var dlg = new SaveFileDialog
             {
                 FileName = "Таблица",
-                DefaultExt = ".xml",
-                Filter = "xml documents (.xml)|*.xml"
+                DefaultExt = ".pcm",
+                Filter = "(.pcm)|*.pcm"
             };
             if (dlg.ShowDialog() == true)
             {

@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Item>
+  <ClassType>Tree.Implementations.TreeNode.StaticNodes.UndefinedTreeNode, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+  <Children>
+    <Item>
+      <ClassType>Tree.Implementations.TreeNode.StaticNodes.AllTreeNode, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+      <Children>
+        <Item>
+          <Year>2017</Year>
+          <ClassType>Tree.Implementations.TreeNode.Year, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+          <Children>
+            <Item>
+              <Month>January</Month>
+              <ClassType>Tree.Implementations.TreeNode.Month, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+              <Children>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>15</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>19</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+              </Children>
+            </Item>
+            <Item>
+              <Month>February</Month>
+              <ClassType>Tree.Implementations.TreeNode.Month, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+              <Children>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+              </Children>
+            </Item>
+            <Item>
+              <Month>March</Month>
+              <ClassType>Tree.Implementations.TreeNode.Month, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+              <Children>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+              </Children>
+            </Item>
+            <Item>
+              <Month>April</Month>
+              <ClassType>Tree.Implementations.TreeNode.Month, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+              <Children>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+                <Item>
+                  <Year>2017</Year>
+                  <Month>February</Month>
+                  <Day>25</Day>
+                  <DeviceName>DeviceName</DeviceName>
+                  <Address>Address</Address>
+                  <Phone>Phone</Phone>
+                  <JobType>JobType</JobType>
+                  <InstalledDetails>InstalledDetails</InstalledDetails>
+                  <Income>2000</Income>
+                  <OutGo>500</OutGo>
+                  <CanHaveChildren>true</CanHaveChildren>
+                  <ClassType>Tree.Implementations.TreeNode.Order, Tree, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</ClassType>
+                </Item>
+              </Children>
+            </Item>
+          </Children>
+        </Item>
+      </Children>
+    </Item>
+  </Children>
+</Item>
