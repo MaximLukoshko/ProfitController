@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
-using Tree.BaseEnums;
 using Tree.Interfaces;
 
 namespace Tree.Implementations.TreeNode
 {
     public abstract class TreeNodeBase : ITreeNode
     {
+        protected TreeNodeBase()
+        {
+            AllChildren = new List<ITreeNode>();;
+        }
+
         #region Properties
         public abstract string NodeName { get; }
         public virtual ICollection<IOrderLine> Orders 
@@ -35,12 +37,8 @@ namespace Tree.Implementations.TreeNode
         { 
             get
             {
-                var ret = new List<ITreeNode>();
-                foreach (var child in _childNodes)
-                    if (child.CanHasChildren)
-                        ret.Add(child);
-                return ret;
-            } 
+                return AllChildren.Where(child => child.CanHasChildren).ToList();
+            }
         }
 
         public virtual bool CanHasChildren
@@ -52,7 +50,7 @@ namespace Tree.Implementations.TreeNode
         }
         #endregion Properties
 
-        protected ICollection<ITreeNode> _childNodes = new List<ITreeNode>();
+        public ICollection<ITreeNode> AllChildren { get; private set; }
         public virtual ITreeNode Parent { get; set; }
         #region Methods
         public virtual ITreeNode CreateNewChild()
@@ -60,10 +58,10 @@ namespace Tree.Implementations.TreeNode
             return null;
         }
      
-        public bool RemoveThis()
+        public virtual bool RemoveThis()
         {
-            var parent = this.Parent;
-            return parent != null ? parent.ChildNodes.Remove(this) : false;
+            var parent = Parent;
+            return parent != null && parent.AllChildren.Remove(this);
         }
         #endregion Methods
 
@@ -75,7 +73,7 @@ namespace Tree.Implementations.TreeNode
             if (child != null)
             {
                 child.Parent = this;
-                _childNodes.Add(child);
+                AllChildren.Add(child);
             }
             
             return child != null;
@@ -90,24 +88,13 @@ namespace Tree.Implementations.TreeNode
             var order = orderLine as IOrder;
             if(order!=null)
             {
-                if(_childNodes.Contains(order))
-                    return _childNodes.Remove(order);
+                if(AllChildren.Contains(order))
+                    return AllChildren.Remove(order);
 
-                foreach (var ch in _childNodes)
-                    if (ch.RemoveOrder(orderLine))
-                        return true;
+                return AllChildren.Any(ch => ch.RemoveOrder(orderLine));
             }
             return false;
         }
-
-        public ICollection<ITreeNode> AllChildren
-        {
-            get 
-            {
-                return _childNodes;
-            }
-        }
-
         public abstract XElement ToXElement();
         public abstract bool FromXElement(XElement elem);
     }

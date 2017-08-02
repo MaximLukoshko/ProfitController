@@ -46,7 +46,7 @@ namespace Tree.Implementations.TreeNode
             get
             {
                 var ret = new List<IOrderLine>();
-                foreach (var child in _childNodes)
+                foreach (var child in AllChildren)
                 {
                     var ord = child as IOrder;
                     if (ord != null)

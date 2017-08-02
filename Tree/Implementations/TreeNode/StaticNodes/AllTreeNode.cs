@@ -19,6 +19,11 @@ namespace Tree.Implementations.TreeNode.StaticNodes
             return new Year(DateTime.Now.Year);
         }
 
+        public override bool RemoveThis()
+        {
+            return false;
+        }
+
         public override XElement ToXElement()
         {
             return new XElement("Item");
