@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Tree.Implementations.TreeNode;
+using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
 namespace Tree.Implementations
@@ -19,6 +20,7 @@ namespace Tree.Implementations
         public TreeModel()
         {
             Root = new UndefinedTreeNode();
+            Root.AddChild(new AllTreeNode());
         }
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)

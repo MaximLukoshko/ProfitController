@@ -85,9 +85,13 @@ namespace Tree.Implementations.TreeNode
 
         public override bool FromXElement(XElement elem)
         {
-            MonthEn val = 0;
-            Enum.TryParse<MonthEn>(elem.Elements(MONTH).FirstOrDefault().Value, out val);
-            Value = val;
+            MonthEn val;
+            var firstOrDefault = elem.Elements(MONTH).FirstOrDefault();
+            if (firstOrDefault != null)
+            {
+                Enum.TryParse(firstOrDefault.Value, out val);
+                Value = val;
+            }
             return true;
         }
 

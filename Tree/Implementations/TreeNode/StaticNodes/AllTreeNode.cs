@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Tree.Interfaces;
 
-namespace Tree.Implementations.TreeNode
+namespace Tree.Implementations.TreeNode.StaticNodes
 {
-    public class UndefinedTreeNode : TreeNodeBase
+    public class AllTreeNode : TreeNodeBase
     {
         public override string NodeName
         {
             get 
             { 
-                return "<...>"; 
+                return "All"; 
             }
         }
 
         public override ITreeNode CreateNewChild()
         {
-            return new Year(2016);
+            return new Year(DateTime.Now.Year);
         }
 
         public override XElement ToXElement()

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using Tree.Implementations.TreeNode;
+using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
 namespace DAOLayer.Implementations
