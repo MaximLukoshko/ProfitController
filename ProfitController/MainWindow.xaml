@@ -14,6 +14,7 @@
 
             <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="20" VerticalAlignment="Top">
             <MenuItem Header="_Файл" >
+                <MenuItem Header="_Создать" HorizontalAlignment="Stretch" Click="Create_BtnClick"/>
                 <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Click="Open_BtnClick"/>
                 <MenuItem Header="_Сохранить" HorizontalAlignment="Stretch" Click="Save_BtnClick"/>
                 <MenuItem Header="_Сохранить как..." HorizontalAlignment="Stretch" Click="SaveAs_BtnClick"/>

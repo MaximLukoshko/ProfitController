@@ -172,5 +172,15 @@ namespace ProfitController
                     MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void Create_BtnClick(object sender, RoutedEventArgs e)
+        {
+            var path = ChooseSaveFile_dlg();
+            if (_dao.SaveModelToFile(_model, path))
+                MessageBox.Show("Файл создан", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("Файл не создан", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            _filename = path;
+        }
     }
 }
