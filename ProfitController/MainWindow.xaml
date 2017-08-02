@@ -4,15 +4,15 @@
         xmlns:profitController="clr-namespace:ProfitController"
         Title="MainWindow" Height="Auto" Width="Auto" MinWidth="300" MinHeight="100">
     <Grid Margin="0" Height="Auto" Width="Auto">
-        
-      
-        
+
+
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Name="Tree" Width="Auto"></ColumnDefinition>
             <ColumnDefinition Name="Info" Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-            <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="20" VerticalAlignment="Top">
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="20" VerticalAlignment="Top">
             <MenuItem Header="_Файл" >
                 <MenuItem Header="_Создать" HorizontalAlignment="Stretch" Click="Create_BtnClick"/>
                 <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Click="Open_BtnClick"/>
@@ -23,7 +23,7 @@
             </MenuItem>
         </Menu>
 
-            <TreeView Name="trw_Orders" DataContext="{Binding Nodes}" Margin="5,25,5,5" Width="Auto" MinWidth="150" Grid.Column="0" MouseLeftButtonUp="treeItem_MouseLeftButtonUp">
+        <TreeView Name="trw_Orders" DataContext="{Binding Nodes}" Margin="5,25,5,5" Width="Auto" MinWidth="150" Grid.Column="0" MouseLeftButtonUp="treeItem_MouseLeftButtonUp">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}">
                     <TextBlock Text="{Binding NodeName}" Margin="0,0,7,0">
@@ -39,15 +39,15 @@
             </TreeView.ItemTemplate>
         </TreeView>
 
-        <DataGrid Name="dgrd_Orders"  Width="Auto" Margin="5,25,5,5" Grid.Column="1" AutoGenerateColumns="False">
-            
+        <DataGrid Name="dgrd_Orders"  Width="Auto" Margin="5,25,5,100" Grid.Column="1" AutoGenerateColumns="False">
+
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Добавить" HorizontalAlignment="Stretch" Click="AddToGrid_Click"/>
                     <MenuItem Header="Удалить" HorizontalAlignment="Stretch" Click="DeleteFromGrid_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
-            
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Год" Width="Auto" Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Месяц" Width="Auto" Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}"/>
@@ -61,6 +61,6 @@
                 <DataGridTextColumn Header="Доходы" Width="*" Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+        <DataGrid x:Name="dgrd_Summary" Grid.Column="1" Width="Auto" Height="Auto" Margin="5,407,5,10" AutoGenerateColumns="False"/>
     </Grid>
 </Window>
