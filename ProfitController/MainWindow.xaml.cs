@@ -95,6 +95,7 @@ namespace ProfitController
             UpdateOrdersView();
         }
 
+        private string _filename;
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog
@@ -106,13 +107,21 @@ namespace ProfitController
             if (dlg.ShowDialog() == true)
             {
                 _dao.LoadModelFromFile(_model, dlg.FileName);
+                _filename = dlg.FileName;
                 UpdateWindow();
             }
         }
 
         private void Save_BtnClick(object sender, RoutedEventArgs e)
         {
-
+            if (_filename != null)
+            {
+                if (_dao.SaveModelToFile(_model, _filename))
+                    MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                    MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else SaveAs_BtnClick(sender, e);
         }
 
         private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
