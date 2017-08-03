@@ -16,16 +16,20 @@ namespace DAOLayer.Implementations
     {
         private const string CLASS_TYPE = @"ClassType";
         private const string CHILDREN = @"Children";
+
         public bool SaveModelToFile(ITreeModel model, string filename)
         {
-            XDocument doc = new XDocument(NodeToXElement(model.Root));
-            if(!string.IsNullOrEmpty(filename))
-                doc.Save(filename);
+            if (string.IsNullOrEmpty(filename))
+                return false;
+            var doc = new XDocument(NodeToXElement(model.Root));
+            doc.Save(filename);
             return true;
         }
 
         public bool LoadModelFromFile(ITreeModel model, string filename)
         {
+            if (string.IsNullOrEmpty(filename))
+                return false;
             var doc = XDocument.Load(filename);
             var root = NodeFromXElement(doc.Root);
             model.InitModel(root);
@@ -35,6 +39,8 @@ namespace DAOLayer.Implementations
 
         public bool SaveNodeToFile(ITreeNode node, string filename)
         {
+            if (string.IsNullOrEmpty(filename))
+                return false;
             var root = new UndefinedTreeNode();
             root.AddChild(node);
             XDocument doc = new XDocument(NodeToXElement(root));

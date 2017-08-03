@@ -54,3 +54,4 @@
 /ProfitController/bin/Debug/*.pdb
 /ProfitController/bin/Debug/Test.xml
 *.pcm
+/ProfitController/bin/Debug/*.pcm
