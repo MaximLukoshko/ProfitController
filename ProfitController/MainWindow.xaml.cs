@@ -14,8 +14,8 @@ namespace ProfitController
     /// </summary>
     public partial class MainWindow
     {
-        private readonly ITreeModel _model = new TreeModel();
-        private readonly IDAO _dao = new DAO();
+        private ITreeModel _model = new TreeModel();
+        private IDAO _dao = new DAO();
         public ICollection<ITreeNode> Nodes 
         { 
             get
@@ -175,12 +175,12 @@ namespace ProfitController
 
         private void Create_BtnClick(object sender, RoutedEventArgs e)
         {
-            var path = ChooseSaveFile_dlg();
-            if (_dao.SaveModelToFile(_model, path))
-                MessageBox.Show("Файл создан", "", MessageBoxButton.OK, MessageBoxImage.Information);
-            else
-                MessageBox.Show("Файл не создан", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            _filename = path;
+            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (dialogResult == MessageBoxResult.Yes)
+                Save_BtnClick(sender,e);//?
+            _model = new TreeModel();
+            UpdateWindow();
+
         }
     }
 }
