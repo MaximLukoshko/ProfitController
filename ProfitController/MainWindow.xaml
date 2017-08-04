@@ -63,8 +63,8 @@
         </DataGrid>
         <DataGrid x:Name="dgrd_Summary" Grid.Column="1" Width="Auto" Height="Auto" Margin="5,407,5,10" AutoGenerateColumns="False">
         <DataGrid.Columns>
-            <DataGridTextColumn Header="Характеристика" Width="*" Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}"/>
-            <DataGridTextColumn Header="Значение" Width="*" Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}"/>
+            <DataGridTextColumn Header="Характеристика" Width="*" Binding="{Binding Path=Key, UpdateSourceTrigger=LostFocus}"/>
+            <DataGridTextColumn Header="Значение" Width="*" Binding="{Binding Path=Value, UpdateSourceTrigger=LostFocus}"/>
         </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Tree.Interfaces;
@@ -14,8 +13,9 @@ namespace Tree.Implementations.TreeNode
         }
 
         public abstract string NodeName { get; }
-        public virtual ICollection<IOrderLine> Orders 
-        { 
+
+        public virtual ICollection<IOrderLine> Orders
+        {
             get
             {
                 var ret = new List<IOrderLine>();
@@ -25,42 +25,40 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
-        public virtual IDictionary<string, object> Summary 
+        public virtual IDictionary<string, object> Summary
         {
             get
             {
-                //Необработанное исключение типа "System.NotImplementedException" в Tree.dll!!!
-                throw new NotImplementedException();
-            } 
-        }
-        public virtual ICollection<ITreeNode> ChildNodes 
-        { 
-            get
-            {
-                return AllChildren.Where(child => child.CanHasChildren).ToList();
+                var ret = new Dictionary<string, object>();
+                ret.Add("Чистая прибыль", Orders.Sum(ordLine => ordLine.Income - ordLine.Outgo));
+                return ret;
             }
+        }
+
+        public virtual ICollection<ITreeNode> ChildNodes
+        {
+            get { return AllChildren.Where(child => child.CanHasChildren).ToList(); }
         }
 
         public virtual bool CanHasChildren
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public ICollection<ITreeNode> AllChildren { get; private set; }
         public virtual ITreeNode Parent { get; set; }
+
         public virtual ITreeNode CreateNewChild()
         {
             return null;
         }
-     
+
         public virtual bool RemoveThis()
         {
             var parent = Parent;
             return parent != null && parent.AllChildren.Remove(this);
         }
+
         public bool AddChild(ITreeNode child = null)
         {
             child = child ?? CreateNewChild();
@@ -70,9 +68,10 @@ namespace Tree.Implementations.TreeNode
                 child.Parent = this;
                 AllChildren.Add(child);
             }
-            
+
             return child != null;
         }
+
         public virtual bool AddOrder()
         {
             return false;
@@ -81,15 +80,16 @@ namespace Tree.Implementations.TreeNode
         public virtual bool RemoveOrder(IOrderLine orderLine)
         {
             var order = orderLine as IOrder;
-            if(order!=null)
+            if (order != null)
             {
-                if(AllChildren.Contains(order))
+                if (AllChildren.Contains(order))
                     return AllChildren.Remove(order);
 
                 return AllChildren.Any(ch => ch.RemoveOrder(orderLine));
             }
             return false;
         }
+
         public abstract XElement ToXElement();
         public abstract bool FromXElement(XElement elem);
     }
