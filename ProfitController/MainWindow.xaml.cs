@@ -16,22 +16,17 @@ namespace ProfitController
     {
         private ITreeModel _model = new TreeModel();
         private IDAO _dao = new DAO();
-        public ICollection<ITreeNode> Nodes 
-        { 
-            get
-            {
-                return _model.Nodes;
-            }
+
+        public ICollection<ITreeNode> Nodes
+        {
+            get { return _model.Nodes; }
         }
 
         public IDAO DataAcsessObject
         {
-            get
-            {
-                return _dao;
-            }
+            get { return _dao; }
         }
-           
+
         public MainWindow()
         {
             InitializeComponent();
@@ -49,14 +44,8 @@ namespace ProfitController
         private void UpdateOrdersView()
         {
             dgrd_Orders.ItemsSource = null;
+            dgrd_Summary.ItemsSource = null;
             var sel = trw_Orders.SelectedItem as ITreeNode;
-            if (sel != null)
-                dgrd_Orders.ItemsSource = sel.Orders;
-        }
-
-        private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var sel = (ITreeNode)trw_Orders.SelectedItem;
             if (sel != null)
             {
                 dgrd_Orders.ItemsSource = sel.Orders;
@@ -64,9 +53,16 @@ namespace ProfitController
             }
         }
 
+        private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            if (sel != null)
+                UpdateOrdersView();
+        }
+
         private void Row_Add(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode)trw_Orders.SelectedItem;
+            var sel = (ITreeNode) trw_Orders.SelectedItem;
             if (sel != null)
                 _model.AddChildToNode(sel);
             UpdateWindow();
@@ -74,30 +70,31 @@ namespace ProfitController
 
         private void Row_Delete(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode)trw_Orders.SelectedItem;
-            if(sel!=null)
+            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            if (sel != null)
                 _model.RemoveNode(sel);
             UpdateWindow();
         }
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode)trw_Orders.SelectedItem;
-            if(sel!=null)
+            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            if (sel != null)
                 _model.AddOrderToNode(sel);
             UpdateOrdersView();
         }
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
         {
-            var selNode = (ITreeNode)trw_Orders.SelectedItem;
-            var selLine = (IOrderLine)dgrd_Orders.SelectedItem;
+            var selNode = (ITreeNode) trw_Orders.SelectedItem;
+            var selLine = (IOrderLine) dgrd_Orders.SelectedItem;
             if (selNode != null)
                 _model.RemoveOrderFromNode(selNode, selLine);
             UpdateOrdersView();
         }
 
         private string _filename = string.Empty;
+
         private string ChooseOpenFile_dlg()
         {
             var dlg = new OpenFileDialog
@@ -110,6 +107,7 @@ namespace ProfitController
                 return dlg.FileName;
             else return string.Empty;
         }
+
         private string ChooseSaveFile_dlg()
         {
             var dlg = new SaveFileDialog
@@ -126,7 +124,7 @@ namespace ProfitController
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
             var path = ChooseOpenFile_dlg();
-                if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path))
             {
                 _dao.LoadModelFromFile(_model, path);
                 _filename = path;
@@ -150,7 +148,7 @@ namespace ProfitController
         {
             var path = ChooseSaveFile_dlg();
             {
-                if (_dao.SaveModelToFile(_model,path))
+                if (_dao.SaveModelToFile(_model, path))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
                     MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -159,7 +157,8 @@ namespace ProfitController
 
         private void Close_BtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?",
+                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
                 Close();
         }
@@ -167,7 +166,7 @@ namespace ProfitController
         private void TrwSaveAs_Click(object sender, RoutedEventArgs e)
         {
             var path = ChooseSaveFile_dlg();
-            var selNode = (ITreeNode)trw_Orders.SelectedItem;
+            var selNode = (ITreeNode) trw_Orders.SelectedItem;
             {
                 if (_dao.SaveNodeToFile(selNode, path))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -178,12 +177,13 @@ namespace ProfitController
 
         private void Create_BtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult dialogResult =
+                MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
-                Save_BtnClick(sender,e);//?
+                Save_BtnClick(sender, e); //?
             _model = new TreeModel();
             UpdateWindow();
-
         }
     }
 }
