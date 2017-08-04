@@ -29,6 +29,7 @@ namespace Tree.Implementations.TreeNode
         {
             get
             {
+                //Необработанное исключение типа "System.NotImplementedException" в Tree.dll!!!
                 throw new NotImplementedException();
             } 
         }

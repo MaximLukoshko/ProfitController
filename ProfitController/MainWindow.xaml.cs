@@ -55,10 +55,13 @@ namespace ProfitController
         }
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        { 
+        {
             var sel = (ITreeNode)trw_Orders.SelectedItem;
-            if(sel!=null)
+            if (sel != null)
+            {
                 dgrd_Orders.ItemsSource = sel.Orders;
+                dgrd_Summary.ItemsSource = sel.Summary;
+            }
         }
 
         private void Row_Add(object sender, RoutedEventArgs e)
