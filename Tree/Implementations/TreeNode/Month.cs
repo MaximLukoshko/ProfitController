@@ -45,9 +45,6 @@ namespace Tree.Implementations.TreeNode
         public Month(int month = 0)
         {
             Value = (MonthEn) month;
-            AddChild();
-            AddChild();
-            AddChild();
         }
 
         public Month()
@@ -57,18 +54,7 @@ namespace Tree.Implementations.TreeNode
 
         public override ITreeNode CreateNewChild()
         {
-            return  new Order(true) {
-                    Year = 2017, 
-                    Month = (MonthEn)1,
-                    Day= 25, 
-                    DeviceName ="DeviceName",
-                    Address ="Address",
-                    Phone ="Phone",
-                    JobType ="JobType",
-                    InstalledDetails ="InstalledDetails",
-                    Income =2000,
-                    Outgo =500
-                };
+            return new Order(true);
         }
 
         public override XElement ToXElement()

@@ -21,10 +21,6 @@ namespace Tree.Implementations.TreeNode
         public Year(int val = 0)
         {
             Value = val;
-            AddChild();
-            AddChild();
-            AddChild();
-            AddChild();
         }
 
         public Year()
