@@ -29,7 +29,7 @@ namespace Tree.Implementations.TreeNode
 
         public override ITreeNode CreateNewChild()
         {
-            return ChildNodes.Count < 12 ? new Month(ChildNodes.Count) : null;
+            return ChildNodes.Count < 12 ? new Month(Value, ChildNodes.Count) : null;
         }
 
         public override XElement ToXElement()

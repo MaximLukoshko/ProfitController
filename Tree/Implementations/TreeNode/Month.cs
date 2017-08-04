@@ -9,15 +9,14 @@ namespace Tree.Implementations.TreeNode
 {
     public class Month : TreeNodeBase
     {
+        private const string YEAR = @"Year";
         private const string MONTH = @"Month";
         public MonthEn Value { get; set; }
+        public int Year { get; private set; }
 
         public override string NodeName
         {
-            get
-            {
-                return Value.ToString();
-            }
+            get { return Value.ToString(); }
         }
 
         public override ICollection<IOrderLine> Orders
@@ -42,8 +41,9 @@ namespace Tree.Implementations.TreeNode
             Value = val;
         }
 
-        public Month(int month = 0)
+        public Month(int year, int month = 0)
         {
+            Year = year;
             Value = (MonthEn) month;
         }
 
@@ -54,12 +54,14 @@ namespace Tree.Implementations.TreeNode
 
         public override ITreeNode CreateNewChild()
         {
-            return new Order(true);
+            return new Order(true) {Year = Year, Month = Value};
         }
 
         public override XElement ToXElement()
         {
-            return new XElement("Item", new XElement(MONTH, Value));
+            return new XElement("Item",
+                new XElement(YEAR, Year),
+                new XElement(MONTH, Value));
         }
 
         public override bool FromXElement(XElement elem)
@@ -71,12 +73,21 @@ namespace Tree.Implementations.TreeNode
                 Enum.TryParse(firstOrDefault.Value, out val);
                 Value = val;
             }
+
+            var year = elem.Elements(YEAR).FirstOrDefault();
+            if (year != null)
+            {
+                int y;
+                int.TryParse(year.Value, out y);
+                Year = y;
+            }
+
             return true;
         }
 
         public override bool AddOrder()
         {
-            return AddChild(new Order());
+            return AddChild(new Order(false) {Year = Year, Month = Value});
         }
     }
 }

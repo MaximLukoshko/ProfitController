@@ -85,7 +85,7 @@ namespace Tree.Implementations.TreeNode
 
         public override ITreeNode CreateNewChild()
         {
-            return new Order(true);
+            return new Order(true) {Year = Year, Month = Month};
         }
 
 
