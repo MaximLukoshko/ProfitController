@@ -10,7 +10,7 @@ namespace Tree.Implementations.TreeNode.StaticNodes
         {
             get 
             { 
-                return "All"; 
+                return "Все"; 
             }
         }
 
