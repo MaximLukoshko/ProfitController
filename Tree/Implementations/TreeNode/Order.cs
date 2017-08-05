@@ -21,8 +21,9 @@ namespace Tree.Implementations.TreeNode
         private const string INCOME = @"Income";
         private const string OUTGO = @"OutGo";
         private const string CAN_HAVE_CHILDREN = @"CanHaveChildren";
-        
+
         #region IOrderLine
+
         public int Year { get; set; }
         public MonthEn Month { get; set; }
         public int Day { get; set; }
@@ -31,16 +32,21 @@ namespace Tree.Implementations.TreeNode
         public string Phone { get; set; }
         public string JobType { get; set; }
         public string InstalledDetails { get; set; }
-        public double Income { get; set; }
         public double Outgo { get; set; }
+        public double Income { get; set; }
+
+        public double Profit
+        {
+            get { return Income - Outgo; }
+        }
+
         #endregion IOrderLine
+
         public override string NodeName
         {
-            get
-            {
-                return string.Format("{0}: {1}", Day, DeviceName);
-            }
+            get { return string.Format("{0}: {1}", Day, DeviceName); }
         }
+
         public override ICollection<IOrderLine> Orders
         {
             get
@@ -57,23 +63,21 @@ namespace Tree.Implementations.TreeNode
                 return ret;
             }
         }
+
         IOrderLine IOrder.Order
         {
-            get
-            { 
-                return this;
-            }
+            get { return this; }
         }
+
         public override bool CanHasChildren
         {
-            get
-            {
-                return _canHasChildren;
-            }
+            get { return _canHasChildren; }
         }
+
         private bool _canHasChildren = false;
 
         #region Methods
+
         public Order(bool canHasSubOrders = false)
         {
             _canHasChildren = canHasSubOrders;
@@ -82,7 +86,6 @@ namespace Tree.Implementations.TreeNode
 
         public Order()
         {
-
         }
 
         public override ITreeNode CreateNewChild()
@@ -90,14 +93,13 @@ namespace Tree.Implementations.TreeNode
             return new Order(true) {Year = Year, Month = Month};
         }
 
-
         #endregion Methods
 
         public override XElement ToXElement()
         {
-            return new XElement("Item", 
+            return new XElement("Item",
                 new XElement(YEAR, Year),
-                new XElement(MONTH, (int)Month),
+                new XElement(MONTH, (int) Month),
                 new XElement(DAY, Day),
                 new XElement(DEVICE_NAME, DeviceName),
                 new XElement(ADDRESS, Address),
@@ -115,7 +117,7 @@ namespace Tree.Implementations.TreeNode
             int year = -1;
             int.TryParse(elem.Elements(YEAR).FirstOrDefault().Value, out year);
             Year = year;
-            
+
             MonthEn month = 0;
             Enum.TryParse(elem.Elements(MONTH).FirstOrDefault().Value, out month);
             Month = month;
@@ -138,12 +140,13 @@ namespace Tree.Implementations.TreeNode
             int.TryParse(elem.Elements(OUTGO).FirstOrDefault().Value, out outgo);
             Outgo = outgo;
 
-            bool canhavechildren = false;
+            bool canhavechildren;
             bool.TryParse(elem.Elements(CAN_HAVE_CHILDREN).FirstOrDefault().Value, out canhavechildren);
             _canHasChildren = canhavechildren;
 
             return true;
         }
+
         public override bool AddOrder()
         {
             return AddChild(new Order());

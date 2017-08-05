@@ -79,7 +79,8 @@
                 <DataGridTextColumn Header="Выполненные работы" Width="*" Binding="{Binding Path=JobType, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Установленные запчасти" Width="*" Binding="{Binding Path=InstalledDetails, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Расходы" Width="Auto" Binding="{Binding Path=Outgo, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Доходы" Width="*" Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Стоимость ремонта" Width="*" Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Доход" Width="*" Binding="{Binding Path=Profit, UpdateSourceTrigger=LostFocus}"/>
             </DataGrid.Columns>
         </DataGrid>
         
