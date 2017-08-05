@@ -209,8 +209,8 @@ namespace ProfitController
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (NeedClose())
-                base.OnClosing(e);
+            e.Cancel = !NeedClose();
+            base.OnClosing(e);
         }
     }
 }
