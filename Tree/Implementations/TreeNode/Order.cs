@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml.Linq;
 using Tree.BaseEnums;
 using Tree.Interfaces;
@@ -76,6 +77,7 @@ namespace Tree.Implementations.TreeNode
         public Order(bool canHasSubOrders = false)
         {
             _canHasChildren = canHasSubOrders;
+            Day = DateTime.Now.Day;
         }
 
         public Order()
