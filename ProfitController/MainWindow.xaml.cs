@@ -155,11 +155,22 @@ namespace ProfitController
             }
         }
 
+        private bool NeedClose()
+        {
+            var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить перед выходом?",
+                "Внимание!", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+            if (dialogResult == MessageBoxResult.Cancel)
+                return false;
+
+            if (dialogResult == MessageBoxResult.Yes)
+                Save_BtnClick(null, null);
+            return true;
+        }
+
         private void Close_BtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?",
-                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (dialogResult == MessageBoxResult.Yes)
+            if (NeedClose())
                 Close();
         }
 
@@ -184,6 +195,11 @@ namespace ProfitController
                 Save_BtnClick(sender, e); //?
             _model = new TreeModel();
             UpdateWindow();
+        }
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (NeedClose())
+                base.OnClosing(e);
         }
     }
 }
