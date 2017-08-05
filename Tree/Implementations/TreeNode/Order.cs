@@ -95,7 +95,7 @@ namespace Tree.Implementations.TreeNode
         {
             return new XElement("Item", 
                 new XElement(YEAR, Year),
-                new XElement(MONTH, Month),
+                new XElement(MONTH, (int)Month),
                 new XElement(DAY, Day),
                 new XElement(DEVICE_NAME, DeviceName),
                 new XElement(ADDRESS, Address),
@@ -115,7 +115,7 @@ namespace Tree.Implementations.TreeNode
             Year = year;
             
             MonthEn month = 0;
-            Enum.TryParse<MonthEn>(elem.Elements(MONTH).FirstOrDefault().Value, out month);
+            Enum.TryParse(elem.Elements(MONTH).FirstOrDefault().Value, out month);
             Month = month;
 
             int day = -1;
