@@ -55,3 +55,16 @@
 /ProfitController/bin/Debug/Test.xml
 *.pcm
 /ProfitController/bin/Debug/*.pcm
+/ProfitController/bin/x86/Release/DAOLayer.dll
+/ProfitController/bin/x86/Release/ProfitController.exe
+/ProfitController/bin/x86/Release/Tree.dll
+/ProfitController/bin/x86/Release/ProfitController.vshost.exe
+/ProfitController/bin/x86/Release/ProfitController.vshost.exe.config
+/ProfitController/bin/x86/Release/ProfitController.vshost.exe.manifest
+/ProfitController/bin/x86/Release/Tree.dll
+/ProfitController/bin/x86/Release/Tree.pdb
+/ProfitController/bin/x86/Release/DAOLayer.dll
+/ProfitController/bin/x86/Release/DAOLayer.pdb
+/ProfitController/bin/x86/Release/ProfitController.exe
+/ProfitController/bin/x86/Release/ProfitController.exe.config
+/ProfitController/bin/x86/Release/ProfitController.pdb
