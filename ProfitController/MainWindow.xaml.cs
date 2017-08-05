@@ -1,4 +1,5 @@
-﻿using DAOLayer.Implementations;
+﻿using System;
+using DAOLayer.Implementations;
 using DAOLayer.Interfaces;
 using System.Collections.Generic;
 using System.Windows;
@@ -95,35 +96,37 @@ namespace ProfitController
 
         private string _filename = string.Empty;
 
-        private string ChooseOpenFile_dlg()
+        internal enum DlgMode
         {
-            var dlg = new OpenFileDialog
-            {
-                FileName = "",
-                DefaultExt = ".pcm",
-                Filter = "(.pcm)|*.pcm"
-            };
-            if (dlg.ShowDialog() == true)
-                return dlg.FileName;
-            else return string.Empty;
+            Save,
+            Open
         }
 
-        private string ChooseSaveFile_dlg()
+        private string ChooseFile(DlgMode mode)
         {
-            var dlg = new SaveFileDialog
+            FileDialog dlg = null;
+            switch (mode)
             {
-                FileName = "",
-                DefaultExt = ".pcm",
-                Filter = "(.pcm)|*.pcm"
-            };
-            if (dlg.ShowDialog() == true)
-                return dlg.FileName;
-            else return string.Empty;
+                case DlgMode.Save:
+                    dlg = new SaveFileDialog();
+                    break;
+                case DlgMode.Open:
+                    dlg = new OpenFileDialog();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("mode", mode, null);
+            }
+
+            dlg.FileName = "";
+            dlg.DefaultExt = ".pcm";
+            dlg.Filter = "(.pcm)|*.pcm";
+            
+            return dlg.ShowDialog() == true ? dlg.FileName : string.Empty;
         }
 
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
-            var path = ChooseOpenFile_dlg();
+            var path = ChooseFile(DlgMode.Open);
             if (!string.IsNullOrEmpty(path))
             {
                 _dao.LoadModelFromFile(_model, path);
@@ -146,7 +149,7 @@ namespace ProfitController
 
         private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
         {
-            var path = ChooseSaveFile_dlg();
+            var path = ChooseFile(DlgMode.Save);
             {
                 if (_dao.SaveModelToFile(_model, path))
                     MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -157,8 +160,7 @@ namespace ProfitController
 
         private bool NeedClose()
         {
-            var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить перед выходом?",
-                "Внимание!", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить перед выходом?", "Внимание!", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
             if (dialogResult == MessageBoxResult.Cancel)
                 return false;
@@ -176,7 +178,7 @@ namespace ProfitController
 
         private void TrwSaveAs_Click(object sender, RoutedEventArgs e)
         {
-            var path = ChooseSaveFile_dlg();
+            var path = ChooseFile(DlgMode.Save);
             var selNode = (ITreeNode) trw_Orders.SelectedItem;
             {
                 if (_dao.SaveNodeToFile(selNode, path))
@@ -188,14 +190,13 @@ namespace ProfitController
 
         private void Create_BtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult =
-                MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
                 Save_BtnClick(sender, e); //?
             _model = new TreeModel();
             UpdateWindow();
         }
+
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             if (NeedClose())
