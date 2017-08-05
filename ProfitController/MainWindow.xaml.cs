@@ -1,4 +1,5 @@
-﻿using DAOLayer.Implementations;
+﻿using System;
+using DAOLayer.Implementations;
 using DAOLayer.Interfaces;
 using System.Collections.Generic;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace ProfitController
     public partial class MainWindow
     {
         private ITreeModel _model = new TreeModel();
-        private IDAO _dao = new DAO();
+        private readonly IDAO _dao = new DAO();
 
         public ICollection<ITreeNode> Nodes
         {
@@ -32,6 +33,8 @@ namespace ProfitController
             InitializeComponent();
             trw_Orders.ItemsSource = Nodes;
         }
+
+        #region RefreshMethods
 
         private void UpdateWindow()
         {
@@ -52,6 +55,8 @@ namespace ProfitController
                 dgrd_Summary.ItemsSource = sel.Summary;
             }
         }
+
+        #endregion RefreshMethods
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -95,35 +100,37 @@ namespace ProfitController
 
         private string _filename = string.Empty;
 
-        private string ChooseOpenFile_dlg()
+        internal enum DlgMode
         {
-            var dlg = new OpenFileDialog
-            {
-                FileName = "",
-                DefaultExt = ".pcm",
-                Filter = "(.pcm)|*.pcm"
-            };
-            if (dlg.ShowDialog() == true)
-                return dlg.FileName;
-            else return string.Empty;
+            Save,
+            Open
         }
 
-        private string ChooseSaveFile_dlg()
+        private string ChooseFile(DlgMode mode)
         {
-            var dlg = new SaveFileDialog
+            FileDialog dlg;
+            switch (mode)
             {
-                FileName = "",
-                DefaultExt = ".pcm",
-                Filter = "(.pcm)|*.pcm"
-            };
-            if (dlg.ShowDialog() == true)
-                return dlg.FileName;
-            else return string.Empty;
+                case DlgMode.Save:
+                    dlg = new SaveFileDialog();
+                    break;
+                case DlgMode.Open:
+                    dlg = new OpenFileDialog();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("mode", mode, null);
+            }
+
+            dlg.FileName = "";
+            dlg.DefaultExt = ".pcm";
+            dlg.Filter = "Profit Controller Model (.pcm)|*.pcm";
+
+            return dlg.ShowDialog() == true ? dlg.FileName : string.Empty;
         }
 
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
-            var path = ChooseOpenFile_dlg();
+            var path = ChooseFile(DlgMode.Open);
             if (!string.IsNullOrEmpty(path))
             {
                 _dao.LoadModelFromFile(_model, path);
@@ -132,58 +139,78 @@ namespace ProfitController
             }
         }
 
+        private void Save()
+        {
+            var result = false;
+
+            if (!string.IsNullOrEmpty(_filename))
+                result = _dao.SaveModelToFile(_model, _filename);
+
+            if (!result)
+                SaveAs();
+        }
+
+        private void SaveAs()
+        {
+            var path = ChooseFile(DlgMode.Save);
+            if (!string.IsNullOrEmpty(path) && !_dao.SaveModelToFile(_model, path))
+                MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
         private void Save_BtnClick(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(_filename))
-            {
-                if (_dao.SaveModelToFile(_model, _filename))
-                    MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else SaveAs_BtnClick(sender, e);
+            Save();
         }
 
         private void SaveAs_BtnClick(object sender, RoutedEventArgs e)
         {
-            var path = ChooseSaveFile_dlg();
-            {
-                if (_dao.SaveModelToFile(_model, path))
-                    MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
-                    MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            SaveAs();
+        }
+
+        private bool NeedClose()
+        {
+            var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить перед выходом?",
+                "Внимание!", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+            if (dialogResult == MessageBoxResult.Cancel)
+                return false;
+
+            if (dialogResult == MessageBoxResult.Yes)
+                Save();
+            return true;
         }
 
         private void Close_BtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nВыйти?",
-                "Внимание!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (dialogResult == MessageBoxResult.Yes)
-                Close();
+            Close();
         }
 
         private void TrwSaveAs_Click(object sender, RoutedEventArgs e)
         {
-            var path = ChooseSaveFile_dlg();
             var selNode = (ITreeNode) trw_Orders.SelectedItem;
+            if (selNode != null)
             {
-                if (_dao.SaveNodeToFile(selNode, path))
-                    MessageBox.Show("Сохранено", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                else
+                var path = ChooseFile(DlgMode.Save);
+                if (!string.IsNullOrEmpty(path) && !_dao.SaveNodeToFile(selNode, path))
                     MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void Create_BtnClick(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult =
+            var dialogResult =
                 MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!",
                     MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (dialogResult == MessageBoxResult.Yes)
-                Save_BtnClick(sender, e); //?
+                Save();
             _model = new TreeModel();
             UpdateWindow();
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = !NeedClose();
+            base.OnClosing(e);
         }
     }
 }

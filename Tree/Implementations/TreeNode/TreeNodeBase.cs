@@ -30,7 +30,7 @@ namespace Tree.Implementations.TreeNode
             get
             {
                 var ret = new Dictionary<string, object>();
-                ret.Add("Чистая прибыль", Orders.Sum(ordLine => ordLine.Income - ordLine.Outgo));
+                ret.Add("Чистая прибыль", Orders.Sum(ordLine => ordLine.Profit));
                 return ret;
             }
         }

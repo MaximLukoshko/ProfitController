@@ -23,14 +23,7 @@ namespace Tree.Implementations.TreeNode
         {
             get
             {
-                var ret = new List<IOrderLine>();
-                foreach (var child in AllChildren)
-                {
-                    var ord = child as IOrder;
-                    if (ord != null)
-                        ret.Add(ord.Order);
-                }
-                return ret;
+                return AllChildren.OfType<IOrder>().Select(ord => ord.Order).ToList();
             }
         }
 
@@ -61,7 +54,7 @@ namespace Tree.Implementations.TreeNode
         {
             return new XElement("Item",
                 new XElement(YEAR, Year),
-                new XElement(MONTH, Value));
+                new XElement(MONTH, (int)Value));
         }
 
         public override bool FromXElement(XElement elem)

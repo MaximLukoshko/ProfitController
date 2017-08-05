@@ -19,5 +19,6 @@ namespace Tree.Interfaces
         string InstalledDetails { get; set; }
         double Outgo { get; set; }
         double Income { get; set; }
+        double Profit { get; }
     }
 }

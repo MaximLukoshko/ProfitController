@@ -70,8 +70,8 @@
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Год" Width="Auto" Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Месяц" Width="Auto" Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Год" IsReadOnly="True" Width="Auto" Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Месяц" IsReadOnly="True" Width="Auto" Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="День" Width="Auto" Binding="{Binding Path=Day, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Наименование изделия" Width="*" Binding="{Binding Path=DeviceName, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Path=Address, UpdateSourceTrigger=LostFocus}"/>
@@ -79,7 +79,8 @@
                 <DataGridTextColumn Header="Выполненные работы" Width="*" Binding="{Binding Path=JobType, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Установленные запчасти" Width="*" Binding="{Binding Path=InstalledDetails, UpdateSourceTrigger=LostFocus}"/>
                 <DataGridTextColumn Header="Расходы" Width="Auto" Binding="{Binding Path=Outgo, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Доходы" Width="*" Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Стоимость ремонта" Width="*" Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}"/>
+                <DataGridTextColumn Header="Доход" Width="*" IsReadOnly="True" Binding="{Binding Path=Profit}"/>
             </DataGrid.Columns>
         </DataGrid>
         
@@ -89,7 +90,8 @@
                   Width="Auto" 
                   Height="90" 
                   Margin="5" 
-                  AutoGenerateColumns="False">
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Характеристика" Width="Auto" Binding="{Binding Path=Key}"/>
                 <DataGridTextColumn Header="Значение" Width="*" Binding="{Binding Path=Value}"/>
