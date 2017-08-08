@@ -29,9 +29,13 @@ namespace Tree.Implementations.TreeNode
         {
             get
             {
-                var ret = new Dictionary<string, object>();
-                ret.Add("Чистая прибыль", Orders.Sum(ordLine => ordLine.Profit));
-                return ret;
+                return new Dictionary<string, object>
+                {
+                    {"Общая стоимость ремонта", Orders.Sum(ordLine => ordLine.Income)},
+                    {"Общая стоимость деталей", Orders.Sum(ordLine => ordLine.Outgo)},
+                    {"Чистая прибыль", Orders.Sum(ordLine => ordLine.Profit)},
+                    {"Количество заказов", Orders.Count}
+                };
             }
         }
 
