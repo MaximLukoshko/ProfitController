@@ -44,9 +44,18 @@ namespace ProfitController
 
         private void UpdateTreeView()
         {
-            var sel = trw_Orders.SelectedItem;
+            var sel = trw_Orders.SelectedItem as TreeNodeWrapper;
             trw_Orders.ItemsSource = Nodes;
-            trw_Orders.SelectedItem = sel;
+            if (sel != null)
+                foreach (var t in trw_Orders.Items)
+                {
+                    var it = t as TreeNodeWrapper;
+                    if (it != null && it.Source.Equals(sel.Source))
+                    {
+                        trw_Orders.SelectedItem = t;
+                        break;
+                    }
+                }
         }
 
         private void UpdateOrdersView()
@@ -207,6 +216,11 @@ namespace ProfitController
                 Save();
 
             return true;
+        }
+
+        private void Update_BtnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateWindow();
         }
 
         private void Close_BtnClick(object sender, RoutedEventArgs e)
