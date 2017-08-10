@@ -103,6 +103,17 @@
       <Name>Tree</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\icons\file\new.ico" />
+    <Resource Include="Content\icons\file\open.ico" />
+    <Resource Include="Content\icons\file\save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\icons\file\close.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\icons\file\saveas.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

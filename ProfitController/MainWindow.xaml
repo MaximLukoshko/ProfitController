@@ -12,6 +12,7 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -27,6 +28,27 @@
             </MenuItem>
         </Menu>
 
+        <ToolBarTray Name="toolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+            <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=toolButTray, Path=ActualWidth}">
+                <Button ToolTip="Создать" Click="Create_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/new.ico" />
+                </Button>
+                <Button ToolTip="Открыть" Click="Open_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/open.ico" />
+                </Button>
+                <Button ToolTip="Сохранить" Click="Save_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/save.ico" />
+                </Button>
+                <Button ToolTip="Сохранить как" Click="SaveAs_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/saveas.ico" />
+                </Button>
+                <Separator/>
+                <Button ToolTip="Закрыть" Click="Close_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/close.ico" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        
         <ListView 
             Name="trw_Orders" 
             DataContext="{Binding Nodes}" 
@@ -35,7 +57,7 @@
             MinWidth="150" 
             Height="Auto"
             Grid.Column="0" 
-            Grid.Row="1" 
+            Grid.Row="2" 
             Grid.RowSpan="2"
             MouseLeftButtonUp="treeItem_MouseLeftButtonUp"
             MouseDoubleClick="trw_Orders_MouseDoubleClick">
@@ -52,7 +74,7 @@
             Name="dgrd_Orders"
             Width="Auto"
             Margin="5"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             AutoGenerateColumns="False">
@@ -81,7 +103,7 @@
         
         <DataGrid x:Name="dgrd_Summary" 
                   Grid.Column="2" 
-                  Grid.Row="2" 
+                  Grid.Row="3" 
                   Width="Auto" 
                   Height="90" 
                   Margin="5" 
