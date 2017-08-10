@@ -33,6 +33,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>profitcontroller.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -117,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\icons\file\refresh.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Content\icons\profitcontroller.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="profitcontroller.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

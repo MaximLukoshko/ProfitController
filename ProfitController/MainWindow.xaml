@@ -1,9 +1,8 @@
 ﻿<Window x:Class="ProfitController.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:profitController="clr-namespace:ProfitController"
-        Title="MainWindow" Height="Auto" Width="Auto" MinWidth="300" MinHeight="200">
-
+        Title="ProfitController" Height="Auto" Width="Auto" MinWidth="300" MinHeight="200">
+    
     <Window.CommandBindings>
         <CommandBinding Command="Refresh" Executed="Update_BtnClick" />
         <CommandBinding Command="Save" Executed="Save_BtnClick" />
