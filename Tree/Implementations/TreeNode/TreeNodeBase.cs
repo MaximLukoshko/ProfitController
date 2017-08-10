@@ -25,6 +25,8 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
+        public bool IsExpanded { get; set; }
+
         public virtual IDictionary<string, object> Summary
         {
             get
@@ -52,6 +54,14 @@ namespace Tree.Implementations.TreeNode
         public ICollection<ITreeNode> AllChildren { get; private set; }
         public virtual ITreeNode Parent { get; set; }
 
+        public override string ToString()
+        {
+            var margin = string.Empty;
+            for (var n = Parent; n.Parent != null; n = n.Parent)
+                margin = margin + "   ";
+            var expander = ChildNodes.Count > 0 ? IsExpanded ? "-" : "+" : " ";
+            return string.Format("{0}{1}{2}", margin, expander, NodeName);
+        }
         public virtual ITreeNode CreateNewChild()
         {
             return null;

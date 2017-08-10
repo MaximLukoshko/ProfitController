@@ -20,7 +20,7 @@ namespace ProfitController
 
         public ICollection<ITreeNode> Nodes
         {
-            get { return _model.Nodes; }
+            get { return GetNodes(_model.Nodes); }
         }
 
         public IDAO DataAcsessObject
@@ -38,10 +38,15 @@ namespace ProfitController
 
         private void UpdateWindow()
         {
-            trw_Orders.ItemsSource = null;
-            trw_Orders.ItemsSource = _model.Nodes;
-
+            UpdateTreeView();
             UpdateOrdersView();
+        }
+
+        private void UpdateTreeView()
+        {
+            var sel = trw_Orders.SelectedItem;
+            trw_Orders.ItemsSource = Nodes;
+            trw_Orders.SelectedItem = sel;
         }
 
         private void UpdateOrdersView()
@@ -57,6 +62,27 @@ namespace ProfitController
         }
 
         #endregion RefreshMethods
+
+        private ICollection<ITreeNode> GetNodes(ICollection<ITreeNode> nodesList)
+        {
+            var ret = new List<ITreeNode>();
+            foreach (var child in nodesList)
+                ret.AddRange(GetNodes(child));
+            return ret;
+        }
+
+        private ICollection<ITreeNode> GetNodes(ITreeNode node)
+        {
+            var ret = new List<ITreeNode>();
+            if (node != null)
+            {
+                ret.Add(node);
+                if (node.IsExpanded)
+                    ret.AddRange(GetNodes(node.ChildNodes));
+
+            }
+            return ret;
+        }
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -130,12 +156,15 @@ namespace ProfitController
 
         private void Open_BtnClick(object sender, RoutedEventArgs e)
         {
-            var path = ChooseFile(DlgMode.Open);
-            if (!string.IsNullOrEmpty(path))
+            if (AskConfirmationAndSave())
             {
-                _dao.LoadModelFromFile(_model, path);
-                _filename = path;
-                UpdateWindow();
+                var path = ChooseFile(DlgMode.Open);
+                if (!string.IsNullOrEmpty(path))
+                {
+                    _dao.LoadModelFromFile(_model, path);
+                    _filename = path;
+                    UpdateWindow();
+                }
             }
         }
 
@@ -167,16 +196,17 @@ namespace ProfitController
             SaveAs();
         }
 
-        private bool NeedClose()
+        private bool AskConfirmationAndSave()
         {
-            var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить перед выходом?",
+            var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить?",
                 "Внимание!", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
             if (dialogResult == MessageBoxResult.Cancel)
-                return false;
+                return false; // Action declined
 
             if (dialogResult == MessageBoxResult.Yes)
                 Save();
+
             return true;
         }
 
@@ -198,19 +228,33 @@ namespace ProfitController
 
         private void Create_BtnClick(object sender, RoutedEventArgs e)
         {
-            var dialogResult =
-                MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить данные?", "Внимание!",
-                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (dialogResult == MessageBoxResult.Yes)
-                Save();
-            _model = new TreeModel();
-            UpdateWindow();
+            if (AskConfirmationAndSave())
+            {
+                _model = new TreeModel();
+                UpdateWindow();
+            }
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = !NeedClose();
+            e.Cancel = !AskConfirmationAndSave();
             base.OnClosing(e);
+        }
+
+        private void ExpandNode(ITreeNode node, bool? expand = null)
+        {
+            if (node != null)
+                node.IsExpanded = expand ?? !node.IsExpanded;
+        }
+
+        private void trw_Orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selNode = (ITreeNode) trw_Orders.SelectedItem;
+            if (selNode != null)
+            {
+                ExpandNode(selNode);
+                UpdateTreeView();
+            }
         }
     }
 }

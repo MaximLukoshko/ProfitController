@@ -20,6 +20,7 @@ namespace Tree.Interfaces
         ICollection<ITreeNode> ChildNodes { get; }
         ITreeNode Parent { get; set; }
         bool CanHasChildren { get; }
+        bool IsExpanded { get; set; }
 
         ICollection<ITreeNode> AllChildren { get; }
         XElement ToXElement();
