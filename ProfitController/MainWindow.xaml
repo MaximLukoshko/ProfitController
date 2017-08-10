@@ -1,8 +1,20 @@
 ﻿<Window x:Class="ProfitController.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:profitController="clr-namespace:ProfitController"
-        Title="MainWindow" Height="Auto" Width="Auto" MinWidth="300" MinHeight="200">
+        Title="ProfitController" Height="Auto" Width="Auto" MinWidth="300" MinHeight="200">
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="Refresh" Executed="Update_BtnClick" />
+        <CommandBinding Command="Save" Executed="Save_BtnClick" />
+        <CommandBinding Command="SaveAs" Executed="SaveAs_BtnClick" />
+        <CommandBinding Command="New" Executed="Create_BtnClick" />
+        <CommandBinding Command="Open" Executed="Open_BtnClick" />
+        <CommandBinding Command="Close" Executed="Close_BtnClick" />
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="Refresh" Key="F5"/>
+    </Window.InputBindings>
+
     <Grid Margin="0" Height="Auto" Width="Auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -19,31 +31,36 @@
 
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="Auto" VerticalAlignment="Top">
             <MenuItem Header="_Файл" >
-                <MenuItem Header="_Создать" HorizontalAlignment="Stretch" Click="Create_BtnClick"/>
-                <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Click="Open_BtnClick"/>
-                <MenuItem Header="_Сохранить" HorizontalAlignment="Stretch" Click="Save_BtnClick"/>
-                <MenuItem Header="_Сохранить как..." HorizontalAlignment="Stretch" Click="SaveAs_BtnClick"/>
+                <MenuItem Header="_Создать" HorizontalAlignment="Stretch" Command="New"/>
+                <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Command="Open"/>
+                <MenuItem Header="_Сохранить" HorizontalAlignment="Stretch" Command="Save"/>
+                <MenuItem Header="_Сохранить как..." HorizontalAlignment="Stretch" Command="SaveAs"/>
                 <Separator/>
-                <MenuItem Header="_Выход" HorizontalAlignment="Stretch" Click="Close_BtnClick"/>
+                <MenuItem Header="_Выход" HorizontalAlignment="Stretch" Command="Close"/>
             </MenuItem>
+            <MenuItem Header="_Обновить(F5)" HorizontalAlignment="Stretch" Command="Refresh" InputGestureText="R"/>
         </Menu>
 
         <ToolBarTray Name="toolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
             <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=toolButTray, Path=ActualWidth}">
-                <Button ToolTip="Создать" Click="Create_BtnClick">
+                <Button ToolTip="Создать" Command="New">
                     <Image Height="24" Width="24" Source="/Content/icons/file/new.ico" />
                 </Button>
-                <Button ToolTip="Открыть" Click="Open_BtnClick">
+                <Button ToolTip="Открыть" Command="Open">
                     <Image Height="24" Width="24" Source="/Content/icons/file/open.ico" />
                 </Button>
-                <Button ToolTip="Сохранить" Click="Save_BtnClick">
+                <Button ToolTip="Сохранить" Command="Save">
                     <Image Height="24" Width="24" Source="/Content/icons/file/save.ico" />
                 </Button>
-                <Button ToolTip="Сохранить как" Click="SaveAs_BtnClick">
+                <Button ToolTip="Сохранить как" Command="SaveAs">
                     <Image Height="24" Width="24" Source="/Content/icons/file/saveas.ico" />
                 </Button>
                 <Separator/>
-                <Button ToolTip="Закрыть" Click="Close_BtnClick">
+                <Button ToolTip="Обновить(F5)" Command="Refresh">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/refresh.ico" />
+                </Button>
+                <Separator/>
+                <Button ToolTip="Закрыть" Command="Close">
                     <Image Height="24" Width="24" Source="/Content/icons/file/close.ico" />
                 </Button>
             </ToolBar>

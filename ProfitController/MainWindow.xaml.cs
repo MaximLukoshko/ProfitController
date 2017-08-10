@@ -18,7 +18,7 @@ namespace ProfitController
         private ITreeModel _model = new TreeModel();
         private readonly IDAO _dao = new DAO();
 
-        public ICollection<ITreeNode> Nodes
+        public ICollection<TreeNodeWrapper> Nodes
         {
             get { return GetNodes(_model.Nodes); }
         }
@@ -44,83 +44,91 @@ namespace ProfitController
 
         private void UpdateTreeView()
         {
-            var sel = trw_Orders.SelectedItem;
+            var sel = trw_Orders.SelectedItem as TreeNodeWrapper;
             trw_Orders.ItemsSource = Nodes;
-            trw_Orders.SelectedItem = sel;
+            if (sel != null)
+                foreach (var t in trw_Orders.Items)
+                {
+                    var it = t as TreeNodeWrapper;
+                    if (it != null && it.Source.Equals(sel.Source))
+                    {
+                        trw_Orders.SelectedItem = t;
+                        break;
+                    }
+                }
         }
 
         private void UpdateOrdersView()
         {
             dgrd_Orders.ItemsSource = null;
             dgrd_Summary.ItemsSource = null;
-            var sel = trw_Orders.SelectedItem as ITreeNode;
+            var sel = trw_Orders.SelectedItem as TreeNodeWrapper;
             if (sel != null)
             {
-                dgrd_Orders.ItemsSource = sel.Orders;
-                dgrd_Summary.ItemsSource = sel.Summary;
+                dgrd_Orders.ItemsSource = sel.Source.Orders;
+                dgrd_Summary.ItemsSource = sel.Source.Summary;
             }
         }
 
         #endregion RefreshMethods
 
-        private ICollection<ITreeNode> GetNodes(ICollection<ITreeNode> nodesList)
+        private ICollection<TreeNodeWrapper> GetNodes(ICollection<ITreeNode> nodesList)
         {
-            var ret = new List<ITreeNode>();
+            var ret = new List<TreeNodeWrapper>();
             foreach (var child in nodesList)
                 ret.AddRange(GetNodes(child));
             return ret;
         }
 
-        private ICollection<ITreeNode> GetNodes(ITreeNode node)
+        private ICollection<TreeNodeWrapper> GetNodes(ITreeNode node)
         {
-            var ret = new List<ITreeNode>();
+            var ret = new List<TreeNodeWrapper>();
             if (node != null)
             {
-                ret.Add(node);
+                ret.Add(new TreeNodeWrapper(node));
                 if (node.IsExpanded)
                     ret.AddRange(GetNodes(node.ChildNodes));
-
             }
             return ret;
         }
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper) trw_Orders.SelectedItem;
             if (sel != null)
                 UpdateOrdersView();
         }
 
         private void Row_Add(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)trw_Orders.SelectedItem;
             if (sel != null)
-                _model.AddChildToNode(sel);
+                _model.AddChildToNode(sel.Source);
             UpdateWindow();
         }
 
         private void Row_Delete(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)trw_Orders.SelectedItem;
             if (sel != null)
-                _model.RemoveNode(sel);
+                _model.RemoveNode(sel.Source);
             UpdateWindow();
         }
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
-            var sel = (ITreeNode) trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)trw_Orders.SelectedItem;
             if (sel != null)
-                _model.AddOrderToNode(sel);
+                _model.AddOrderToNode(sel.Source);
             UpdateOrdersView();
         }
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
         {
-            var selNode = (ITreeNode) trw_Orders.SelectedItem;
+            var selNode = (TreeNodeWrapper)trw_Orders.SelectedItem;
             var selLine = (IOrderLine) dgrd_Orders.SelectedItem;
             if (selNode != null)
-                _model.RemoveOrderFromNode(selNode, selLine);
+                _model.RemoveOrderFromNode(selNode.Source, selLine);
             UpdateOrdersView();
         }
 
@@ -210,6 +218,11 @@ namespace ProfitController
             return true;
         }
 
+        private void Update_BtnClick(object sender, RoutedEventArgs e)
+        {
+            UpdateWindow();
+        }
+
         private void Close_BtnClick(object sender, RoutedEventArgs e)
         {
             Close();
@@ -217,11 +230,11 @@ namespace ProfitController
 
         private void TrwSaveAs_Click(object sender, RoutedEventArgs e)
         {
-            var selNode = (ITreeNode) trw_Orders.SelectedItem;
+            var selNode = (TreeNodeWrapper)trw_Orders.SelectedItem;
             if (selNode != null)
             {
                 var path = ChooseFile(DlgMode.Save);
-                if (!string.IsNullOrEmpty(path) && !_dao.SaveNodeToFile(selNode, path))
+                if (!string.IsNullOrEmpty(path) && !_dao.SaveNodeToFile(selNode.Source, path))
                     MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -249,10 +262,10 @@ namespace ProfitController
 
         private void trw_Orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var selNode = (ITreeNode) trw_Orders.SelectedItem;
+            var selNode = (TreeNodeWrapper) trw_Orders.SelectedItem;
             if (selNode != null)
             {
-                ExpandNode(selNode);
+                ExpandNode(selNode.Source);
                 UpdateTreeView();
             }
         }
