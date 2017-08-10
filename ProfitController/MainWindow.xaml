@@ -12,6 +12,7 @@
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -27,7 +28,28 @@
             </MenuItem>
         </Menu>
 
-        <TreeView 
+        <ToolBarTray Name="toolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+            <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=toolButTray, Path=ActualWidth}">
+                <Button ToolTip="Создать" Click="Create_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/new.ico" />
+                </Button>
+                <Button ToolTip="Открыть" Click="Open_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/open.ico" />
+                </Button>
+                <Button ToolTip="Сохранить" Click="Save_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/save.ico" />
+                </Button>
+                <Button ToolTip="Сохранить как" Click="SaveAs_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/saveas.ico" />
+                </Button>
+                <Separator/>
+                <Button ToolTip="Закрыть" Click="Close_BtnClick">
+                    <Image Height="24" Width="24" Source="/Content/icons/file/close.ico" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        
+        <ListView 
             Name="trw_Orders" 
             DataContext="{Binding Nodes}" 
             Margin="5" 
@@ -35,29 +57,24 @@
             MinWidth="150" 
             Height="Auto"
             Grid.Column="0" 
-            Grid.Row="1" 
-            Grid.RowSpan="2" 
-            MouseLeftButtonUp="treeItem_MouseLeftButtonUp">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding ChildNodes}">
-                    <TextBlock Text="{Binding NodeName}" Margin="0,0,7,0">
-                        <TextBlock.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Добавить" Command="{Binding Command}" Click="Row_Add"/>
-                                <MenuItem Header="Удалить" Command="{Binding Command}" Click="Row_Delete"/>
-                                <MenuItem Header="Сохранить в файл" Command="{Binding Command}" Click="TrwSaveAs_Click"/>
-                            </ContextMenu>
-                        </TextBlock.ContextMenu>
-                    </TextBlock>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-
+            Grid.Row="2" 
+            Grid.RowSpan="2"
+            MouseLeftButtonUp="treeItem_MouseLeftButtonUp"
+            MouseDoubleClick="trw_Orders_MouseDoubleClick">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" Command="{Binding Command}" Click="Row_Add"/>
+                    <MenuItem Header="Удалить" Command="{Binding Command}" Click="Row_Delete"/>
+                    <MenuItem Header="Сохранить в файл" Command="{Binding Command}" Click="TrwSaveAs_Click"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        
         <DataGrid 
             Name="dgrd_Orders"
             Width="Auto"
             Margin="5"
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             AutoGenerateColumns="False">
@@ -86,16 +103,18 @@
         
         <DataGrid x:Name="dgrd_Summary" 
                   Grid.Column="2" 
-                  Grid.Row="2" 
+                  Grid.Row="3" 
                   Width="Auto" 
                   Height="90" 
                   Margin="5" 
                   AutoGenerateColumns="False"
                   IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Характеристика" Width="Auto" Binding="{Binding Path=Key}"/>
-                <DataGridTextColumn Header="Значение" Width="*" Binding="{Binding Path=Value}"/>
+                <DataGridTextColumn Width="Auto" Binding="{Binding Path=Key}"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Path=Value}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
+
+    

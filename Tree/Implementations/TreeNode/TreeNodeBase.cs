@@ -25,13 +25,19 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
+        public bool IsExpanded { get; set; }
+
         public virtual IDictionary<string, object> Summary
         {
             get
             {
-                var ret = new Dictionary<string, object>();
-                ret.Add("Чистая прибыль", Orders.Sum(ordLine => ordLine.Profit));
-                return ret;
+                return new Dictionary<string, object>
+                {
+                    {"Общая стоимость ремонта", Orders.Sum(ordLine => ordLine.Income)},
+                    {"Общая стоимость деталей", Orders.Sum(ordLine => ordLine.Outgo)},
+                    {"Чистая прибыль", Orders.Sum(ordLine => ordLine.Profit)},
+                    {"Количество заказов", Orders.Count}
+                };
             }
         }
 
@@ -48,6 +54,14 @@ namespace Tree.Implementations.TreeNode
         public ICollection<ITreeNode> AllChildren { get; private set; }
         public virtual ITreeNode Parent { get; set; }
 
+        public override string ToString()
+        {
+            var margin = string.Empty;
+            for (var n = Parent; n.Parent != null; n = n.Parent)
+                margin = margin + "   ";
+            var expander = ChildNodes.Count > 0 ? IsExpanded ? "-" : "+" : " ";
+            return string.Format("{0}{1}{2}", margin, expander, NodeName);
+        }
         public virtual ITreeNode CreateNewChild()
         {
             return null;
