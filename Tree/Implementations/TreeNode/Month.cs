@@ -18,10 +18,7 @@ namespace Tree.Implementations.TreeNode
 
         public override ICollection<IOrderLine> Orders
         {
-            get
-            {
-                return AllChildren.OfType<IOrder>().Select(ord => ord.Order).ToList();
-            }
+            get { return AllChildren.OfType<IOrder>().Select(ord => ord.Order).ToList(); }
         }
 
         public Month(string month)
@@ -39,7 +36,6 @@ namespace Tree.Implementations.TreeNode
 
         public Month()
         {
-
         }
 
         public override ITreeNode CreateNewChild()
@@ -51,7 +47,7 @@ namespace Tree.Implementations.TreeNode
         {
             return new XElement("Item",
                 new XElement(StringConstants.Year, Year),
-                new XElement(StringConstants.Month, (int)Value));
+                new XElement(StringConstants.Month, (int) Value));
         }
 
         public override bool FromXElement(XElement elem)

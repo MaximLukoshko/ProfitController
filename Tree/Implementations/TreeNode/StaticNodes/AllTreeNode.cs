@@ -8,10 +8,7 @@ namespace Tree.Implementations.TreeNode.StaticNodes
     {
         public override string NodeName
         {
-            get 
-            { 
-                return "Все"; 
-            }
+            get { return "Все"; }
         }
 
         public override ITreeNode CreateNewChild()

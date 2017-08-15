@@ -5,7 +5,7 @@ namespace Tree.Interfaces
     public interface ITreeModel
     {
         ICollection<ITreeNode> Nodes { get; }
-        ITreeNode Root { get;}
+        ITreeNode Root { get; }
 
         bool AddChildToNode(ITreeNode node, ITreeNode childNode = null);
         bool RemoveNode(ITreeNode node);

@@ -6,11 +6,9 @@ namespace Tree.Implementations.TreeNode.StaticNodes
     {
         public override string NodeName
         {
-            get 
-            { 
-                return "<...>"; 
-            }
+            get { return "<...>"; }
         }
+
         public override XElement ToXElement()
         {
             return new XElement("Item");

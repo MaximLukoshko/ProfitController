@@ -8,10 +8,7 @@ namespace Tree.Implementations
     {
         public ICollection<ITreeNode> Nodes
         {
-            get 
-            {
-                return Root.ChildNodes;
-            }
+            get { return Root.ChildNodes; }
         }
 
         public ITreeNode Root { get; set; }

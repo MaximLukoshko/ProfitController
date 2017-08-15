@@ -5,16 +5,13 @@ using System.Linq;
 
 namespace Tree.Implementations.TreeNode
 {
-
     public class Year : TreeNodeBase
     {
         private int Value { get; set; }
+
         public override string NodeName
         {
-            get
-            {
-                return Value.ToString();
-            }
+            get { return Value.ToString(); }
         }
 
         public Year(int val = 0)

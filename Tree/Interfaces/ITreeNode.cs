@@ -8,7 +8,6 @@ namespace Tree.Interfaces
     // !!! ATTENTION !!! //
     public interface ITreeNode
     {
-
         string NodeName { get; }
         ICollection<IOrderLine> Orders { get; }
         IDictionary<string, object> Summary { get; }

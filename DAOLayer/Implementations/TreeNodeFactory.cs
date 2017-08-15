@@ -18,7 +18,6 @@ namespace DAOLayer.Implementations
                 ret = Activator.CreateInstance(type) as ITreeNode;
                 if (ret == null)
                     throw new NullReferenceException(string.Format("Object of type '{0}' can not be created", typeStr));
-
             }
             catch (Exception)
             {

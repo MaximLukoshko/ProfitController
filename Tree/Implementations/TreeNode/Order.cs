@@ -86,7 +86,7 @@ namespace Tree.Implementations.TreeNode
         {
             return new XElement("Item",
                 new XElement(StringConstants.Year, Year),
-                new XElement(StringConstants.Month, (int)Month),
+                new XElement(StringConstants.Month, (int) Month),
                 new XElement(StringConstants.Day, Day),
                 new XElement(StringConstants.DeviceName, DeviceName),
                 new XElement(StringConstants.Address, Address),
