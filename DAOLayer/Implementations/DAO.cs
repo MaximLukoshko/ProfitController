@@ -1,19 +1,13 @@
 ﻿using DAOLayer.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 using Tree;
-using Tree.Implementations.TreeNode;
 using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
 namespace DAOLayer.Implementations
 {
-    public class DAO : IDAO
+    public class Dao : IDao
     {
         public bool SaveModelToFile(ITreeModel model, string filename)
         {
@@ -59,18 +53,19 @@ namespace DAOLayer.Implementations
                 }
                 ret.Add(children);
             }
-                
+
             return ret;
         }
 
         private ITreeNode NodeFromXElement(XElement element)
         {
+            // ReSharper disable once PossibleNullReferenceException
             var ret = TreeNodeFactory.CreateTreeNode(element.Elements(StringConstants.ClassType).FirstOrDefault().Value);
             ret.FromXElement(element);
             var childElements = element.Elements(StringConstants.Children);
-            foreach(var ch in childElements.Elements())
+            foreach (var ch in childElements.Elements())
                 ret.AddChild(NodeFromXElement(ch));
-            
+
             return ret;
         }
     }

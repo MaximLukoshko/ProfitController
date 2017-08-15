@@ -41,8 +41,8 @@
             <MenuItem Header="_Обновить(F5)" HorizontalAlignment="Stretch" Command="Refresh" InputGestureText="R"/>
         </Menu>
 
-        <ToolBarTray Name="toolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
-            <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=toolButTray, Path=ActualWidth}">
+        <ToolBarTray Name="ToolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+            <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=ToolButTray, Path=ActualWidth}">
                 <Button ToolTip="Создать" Command="New">
                     <Image Height="24" Width="24" Source="/Content/icons/file/new.ico" />
                 </Button>
@@ -67,7 +67,7 @@
         </ToolBarTray>
         
         <ListView 
-            Name="trw_Orders" 
+            Name="TrwOrders" 
             DataContext="{Binding Nodes}" 
             Margin="5" 
             Width="Auto" 
@@ -88,7 +88,7 @@
         </ListView>
         
         <DataGrid 
-            Name="dgrd_Orders"
+            Name="DgrdOrders"
             Width="Auto"
             Margin="5"
             Grid.Row="2"
@@ -118,7 +118,7 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <DataGrid x:Name="dgrd_Summary" 
+        <DataGrid x:Name="DgrdSummary" 
                   Grid.Column="2" 
                   Grid.Row="3" 
                   Width="Auto" 

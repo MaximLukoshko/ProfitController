@@ -96,8 +96,11 @@ namespace Tree.Implementations.TreeNode
             return false;
         }
 
+#pragma warning disable 659
         public override bool Equals(object obj)
+#pragma warning restore 659
         {
+            // ReSharper disable once BaseObjectEqualsIsObjectEquals
             if (base.Equals(obj))
                 return true;
 

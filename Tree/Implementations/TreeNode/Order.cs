@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Linq;
 using Tree.Interfaces;
 using System.Linq;
@@ -45,7 +45,7 @@ namespace Tree.Implementations.TreeNode
                     if (ord != null)
                         ret.Add(ord.Order);
                     else
-                        ret.AddRange(ord.Orders);
+                        ret.AddRange(child.Orders);
                 }
                 return ret;
             }
@@ -61,7 +61,7 @@ namespace Tree.Implementations.TreeNode
             get { return _canHasChildren; }
         }
 
-        private bool _canHasChildren = false;
+        private bool _canHasChildren;
 
         #region Methods
 
@@ -99,17 +99,18 @@ namespace Tree.Implementations.TreeNode
                 );
         }
 
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         public override bool FromXElement(XElement elem)
         {
-            int year = -1;
+            int year;
             int.TryParse(elem.Elements(StringConstants.Year).FirstOrDefault().Value, out year);
             Year = year;
 
-            MonthEn month = 0;
+            MonthEn month;
             Enum.TryParse(elem.Elements(StringConstants.Month).FirstOrDefault().Value, out month);
             Month = month;
 
-            int day = -1;
+            int day;
             int.TryParse(elem.Elements(StringConstants.Day).FirstOrDefault().Value, out day);
             Day = day;
 
@@ -119,11 +120,11 @@ namespace Tree.Implementations.TreeNode
             JobType = elem.Elements(StringConstants.Jobtype).FirstOrDefault().Value;
             InstalledDetails = elem.Elements(StringConstants.InstalledDetails).FirstOrDefault().Value;
 
-            int income = -1;
+            int income;
             int.TryParse(elem.Elements(StringConstants.Income).FirstOrDefault().Value, out income);
             Income = income;
 
-            int outgo = -1;
+            int outgo;
             int.TryParse(elem.Elements(StringConstants.Outgo).FirstOrDefault().Value, out outgo);
             Outgo = outgo;
 
@@ -139,7 +140,9 @@ namespace Tree.Implementations.TreeNode
             return AddChild(new Order());
         }
 
+#pragma warning disable 659
         public override bool Equals(object obj)
+#pragma warning restore 659
         {
             var cmpObj = obj as Order;
             if (cmpObj == null)

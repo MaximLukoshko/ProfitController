@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tree.Implementations.TreeNode;
 using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
@@ -13,17 +8,17 @@ namespace DAOLayer.Implementations
     {
         public static ITreeNode CreateTreeNode(string typeStr)
         {
-            Type type = Type.GetType(typeStr);
-            ITreeNode ret = null;
+            var type = Type.GetType(typeStr);
+            ITreeNode ret;
             try
             {
                 if (type == null)
                     throw new NullReferenceException(string.Format("Type '{0}' was not found", typeStr));
-                
+
                 ret = Activator.CreateInstance(type) as ITreeNode;
                 if (ret == null)
                     throw new NullReferenceException(string.Format("Object of type '{0}' can not be created", typeStr));
-                
+
             }
             catch (Exception)
             {

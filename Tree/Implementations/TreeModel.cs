@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Tree.Implementations.TreeNode;
 using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
@@ -50,10 +49,12 @@ namespace Tree.Implementations
             Root = root ?? Root;
         }
 
+#pragma warning disable 659
         public override bool Equals(object obj)
+#pragma warning restore 659
         {
             var cmpObj = obj as TreeModel;
-            return cmpObj != null ? Root.Equals(cmpObj.Root) : base.Equals(obj);
+            return cmpObj != null && Root.Equals(cmpObj.Root);
         }
     }
 }

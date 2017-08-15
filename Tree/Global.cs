@@ -34,11 +34,11 @@
 
         #endregion TreeNode
 
-        #region DAO
+        #region Dao
 
         public static readonly string ClassType = @"ClassType";
         public static readonly string Children = @"Children";
 
-        #endregion DAO
+        #endregion Dao
     }
 }

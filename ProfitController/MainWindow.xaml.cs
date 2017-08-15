@@ -16,14 +16,14 @@ namespace ProfitController
     public partial class MainWindow
     {
         private ITreeModel _model = new TreeModel();
-        private readonly IDAO _dao = new DAO();
+        private readonly IDao _dao = new Dao();
 
         public ICollection<TreeNodeWrapper> Nodes
         {
             get { return GetNodes(_model.Nodes); }
         }
 
-        public IDAO DataAcsessObject
+        public IDao DataAcsessObject
         {
             get { return _dao; }
         }
@@ -31,7 +31,7 @@ namespace ProfitController
         public MainWindow()
         {
             InitializeComponent();
-            trw_Orders.ItemsSource = Nodes;
+            TrwOrders.ItemsSource = Nodes;
         }
 
         #region RefreshMethods
@@ -44,29 +44,30 @@ namespace ProfitController
 
         private void UpdateTreeView()
         {
-            var sel = trw_Orders.SelectedItem as TreeNodeWrapper;
-            trw_Orders.ItemsSource = Nodes;
-            if (sel != null)
-                foreach (var t in trw_Orders.Items)
+            var sel = TrwOrders.SelectedItem as TreeNodeWrapper;
+            TrwOrders.ItemsSource = Nodes;
+            if (sel == null)
+                return;
+            foreach (var t in TrwOrders.Items)
+            {
+                var it = t as TreeNodeWrapper;
+                if (it != null && it.Source.Equals(sel.Source))
                 {
-                    var it = t as TreeNodeWrapper;
-                    if (it != null && it.Source.Equals(sel.Source))
-                    {
-                        trw_Orders.SelectedItem = t;
-                        break;
-                    }
+                    TrwOrders.SelectedItem = t;
+                    break;
                 }
+            }
         }
 
         private void UpdateOrdersView()
         {
-            dgrd_Orders.ItemsSource = null;
-            dgrd_Summary.ItemsSource = null;
-            var sel = trw_Orders.SelectedItem as TreeNodeWrapper;
+            DgrdOrders.ItemsSource = null;
+            DgrdSummary.ItemsSource = null;
+            var sel = TrwOrders.SelectedItem as TreeNodeWrapper;
             if (sel != null)
             {
-                dgrd_Orders.ItemsSource = sel.Source.Orders;
-                dgrd_Summary.ItemsSource = sel.Source.Summary;
+                DgrdOrders.ItemsSource = sel.Source.Orders;
+                DgrdSummary.ItemsSource = sel.Source.Summary;
             }
         }
 
@@ -94,14 +95,14 @@ namespace ProfitController
 
         private void treeItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var sel = (TreeNodeWrapper) trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)TrwOrders.SelectedItem;
             if (sel != null)
                 UpdateOrdersView();
         }
 
         private void Row_Add(object sender, RoutedEventArgs e)
         {
-            var sel = (TreeNodeWrapper)trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)TrwOrders.SelectedItem;
             if (sel != null)
                 _model.AddChildToNode(sel.Source);
             UpdateWindow();
@@ -109,7 +110,7 @@ namespace ProfitController
 
         private void Row_Delete(object sender, RoutedEventArgs e)
         {
-            var sel = (TreeNodeWrapper)trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)TrwOrders.SelectedItem;
             if (sel != null)
                 _model.RemoveNode(sel.Source);
             UpdateWindow();
@@ -117,7 +118,7 @@ namespace ProfitController
 
         private void AddToGrid_Click(object sender, RoutedEventArgs e)
         {
-            var sel = (TreeNodeWrapper)trw_Orders.SelectedItem;
+            var sel = (TreeNodeWrapper)TrwOrders.SelectedItem;
             if (sel != null)
                 _model.AddOrderToNode(sel.Source);
             UpdateOrdersView();
@@ -125,8 +126,8 @@ namespace ProfitController
 
         private void DeleteFromGrid_Click(object sender, RoutedEventArgs e)
         {
-            var selNode = (TreeNodeWrapper)trw_Orders.SelectedItem;
-            var selLine = (IOrderLine) dgrd_Orders.SelectedItem;
+            var selNode = (TreeNodeWrapper)TrwOrders.SelectedItem;
+            var selLine = (IOrderLine)DgrdOrders.SelectedItem;
             if (selNode != null)
                 _model.RemoveOrderFromNode(selNode.Source, selLine);
             UpdateOrdersView();
@@ -245,7 +246,7 @@ namespace ProfitController
 
         private void TrwSaveAs_Click(object sender, RoutedEventArgs e)
         {
-            var selNode = (TreeNodeWrapper)trw_Orders.SelectedItem;
+            var selNode = (TreeNodeWrapper)TrwOrders.SelectedItem;
             if (selNode != null)
             {
                 var path = ChooseFile(DlgMode.Save);
@@ -278,7 +279,7 @@ namespace ProfitController
 
         private void trw_Orders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var selNode = (TreeNodeWrapper) trw_Orders.SelectedItem;
+            var selNode = (TreeNodeWrapper)TrwOrders.SelectedItem;
             if (selNode != null)
             {
                 ExpandNode(selNode.Source);
