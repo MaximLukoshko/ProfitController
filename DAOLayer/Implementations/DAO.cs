@@ -9,6 +9,8 @@ namespace DAOLayer.Implementations
 {
     public class Dao : IDao
     {
+        #region IDao
+
         public bool SaveModelToFile(ITreeModel model, string filename)
         {
             if (string.IsNullOrEmpty(filename))
@@ -40,6 +42,10 @@ namespace DAOLayer.Implementations
             return true;
         }
 
+        #endregion IDao
+
+        #region HelpingMethods
+
         private XElement NodeToXElement(ITreeNode node)
         {
             var ret = node.ToXElement();
@@ -68,5 +74,7 @@ namespace DAOLayer.Implementations
 
             return ret;
         }
+
+        #endregion HelpingMethods
     }
 }
