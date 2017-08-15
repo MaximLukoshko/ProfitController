@@ -4,6 +4,8 @@ namespace Tree.Implementations.TreeNode.StaticNodes
 {
     public class UndefinedTreeNode : TreeNodeBase
     {
+        #region TreeNodeBase
+
         public override string NodeName
         {
             get { return "<...>"; }
@@ -18,5 +20,7 @@ namespace Tree.Implementations.TreeNode.StaticNodes
         {
             return true;
         }
+
+        #endregion TreeNodeBase
     }
 }

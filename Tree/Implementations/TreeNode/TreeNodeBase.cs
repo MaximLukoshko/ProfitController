@@ -7,10 +7,16 @@ namespace Tree.Implementations.TreeNode
 {
     public abstract class TreeNodeBase : ITreeNode
     {
+        #region    Constructors
+
         protected TreeNodeBase()
         {
             AllChildren = new List<ITreeNode>();
         }
+
+        #endregion Constructors
+
+        #region    ITreeNode
 
         public abstract string NodeName { get; }
 
@@ -96,6 +102,13 @@ namespace Tree.Implementations.TreeNode
             return false;
         }
 
+        public abstract XElement ToXElement();
+        public abstract bool FromXElement(XElement elem);
+
+        #endregion ITreeNode
+
+        #region    Object
+
 #pragma warning disable 659
         public override bool Equals(object obj)
 #pragma warning restore 659
@@ -126,7 +139,6 @@ namespace Tree.Implementations.TreeNode
             return ret;
         }
 
-        public abstract XElement ToXElement();
-        public abstract bool FromXElement(XElement elem);
+        #endregion Object
     }
 }

@@ -9,6 +9,22 @@ namespace Tree.Implementations.TreeNode
 {
     public class Order : TreeNodeBase, IOrder
     {
+        #region Constructors
+
+        public Order(bool canHasSubOrders = false)
+        {
+            _canHasChildren = canHasSubOrders;
+            Day = DateTime.Now.Day;
+        }
+
+        public Order()
+        {
+        }
+
+        #endregion Constructors
+
+        #region IOrder
+
         #region IOrderLine
 
         public int Year { get; set; }
@@ -28,6 +44,8 @@ namespace Tree.Implementations.TreeNode
         }
 
         #endregion IOrderLine
+
+        #region TreeNodeBase
 
         public override string NodeName
         {
@@ -51,11 +69,6 @@ namespace Tree.Implementations.TreeNode
             }
         }
 
-        IOrderLine IOrder.Order
-        {
-            get { return this; }
-        }
-
         public override bool CanHasChildren
         {
             get { return _canHasChildren; }
@@ -63,24 +76,11 @@ namespace Tree.Implementations.TreeNode
 
         private bool _canHasChildren;
 
-        #region Methods
-
-        public Order(bool canHasSubOrders = false)
-        {
-            _canHasChildren = canHasSubOrders;
-            Day = DateTime.Now.Day;
-        }
-
-        public Order()
-        {
-        }
 
         public override ITreeNode CreateNewChild()
         {
             return new Order(true) {Year = Year, Month = Month};
         }
-
-        #endregion Methods
 
         public override XElement ToXElement()
         {
@@ -140,6 +140,17 @@ namespace Tree.Implementations.TreeNode
             return AddChild(new Order());
         }
 
+        #endregion TreeNodeBase
+
+        IOrderLine IOrder.Order
+        {
+            get { return this; }
+        }
+
+        #endregion IOrder
+
+        #region Object
+
 #pragma warning disable 659
         public override bool Equals(object obj)
 #pragma warning restore 659
@@ -162,5 +173,7 @@ namespace Tree.Implementations.TreeNode
 
             return ret && base.Equals(obj);
         }
+
+        #endregion Object
     }
 }

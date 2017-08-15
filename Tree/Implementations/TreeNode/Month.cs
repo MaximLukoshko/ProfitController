@@ -11,6 +11,8 @@ namespace Tree.Implementations.TreeNode
         public MonthEn Value { get; set; }
         public int Year { get; private set; }
 
+        #region TreeNodeBase
+
         public override string NodeName
         {
             get { return Value.ToString(); }
@@ -75,5 +77,7 @@ namespace Tree.Implementations.TreeNode
         {
             return AddChild(new Order(false) {Year = Year, Month = Value});
         }
+
+        #endregion TreeNodeBase
     }
 }

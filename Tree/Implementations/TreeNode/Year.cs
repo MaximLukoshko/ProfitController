@@ -7,12 +7,7 @@ namespace Tree.Implementations.TreeNode
 {
     public class Year : TreeNodeBase
     {
-        private int Value { get; set; }
-
-        public override string NodeName
-        {
-            get { return Value.ToString(); }
-        }
+        #region Constructors
 
         public Year(int val = 0)
         {
@@ -21,6 +16,15 @@ namespace Tree.Implementations.TreeNode
 
         public Year()
         {
+        }
+
+        #endregion Constructors
+
+        #region TreeNodeBase
+
+        public override string NodeName
+        {
+            get { return Value.ToString(); }
         }
 
         public override ITreeNode CreateNewChild()
@@ -44,5 +48,13 @@ namespace Tree.Implementations.TreeNode
             }
             return true;
         }
+
+        #endregion TreeNodeBase
+
+        #region PrivateMembers
+
+        private int Value { get; set; }
+
+        #endregion PrivateMembers
     }
 }
