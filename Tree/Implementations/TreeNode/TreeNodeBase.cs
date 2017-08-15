@@ -96,6 +96,33 @@ namespace Tree.Implementations.TreeNode
             return false;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (base.Equals(obj))
+                return true;
+
+            var cmpObj = obj as TreeNodeBase;
+            if (cmpObj == null)
+                return false;
+
+            var ret = cmpObj.NodeName.Equals(NodeName);
+            if (!ret)
+                return false;
+
+            ret = cmpObj.CanHasChildren == CanHasChildren;
+            if (!ret)
+                return false;
+            ret = cmpObj.AllChildren.Count == AllChildren.Count;
+            if (!ret)
+                return false;
+
+            for (var i = 0; i < AllChildren.Count && ret; i++)
+                if (!cmpObj.AllChildren.ElementAt(i).Equals(AllChildren.ElementAt(i)))
+                    ret = false;
+
+            return ret;
+        }
+
         public abstract XElement ToXElement();
         public abstract bool FromXElement(XElement elem);
     }

@@ -151,5 +151,26 @@ namespace Tree.Implementations.TreeNode
         {
             return AddChild(new Order());
         }
+
+        public override bool Equals(object obj)
+        {
+            var cmpObj = obj as Order;
+            if (cmpObj == null)
+                return false;
+
+            var ret = cmpObj.Year == Year;
+            ret = ret && cmpObj.Month == Month;
+            ret = ret && cmpObj.Day == Day;
+            ret = ret && cmpObj.DeviceName == DeviceName;
+            ret = ret && cmpObj.Address == Address;
+            ret = ret && cmpObj.Phone == Phone;
+            ret = ret && cmpObj.JobType == JobType;
+            ret = ret && cmpObj.InstalledDetails == InstalledDetails;
+            ret = ret && (cmpObj.Income.Equals(Income));
+            ret = ret && (cmpObj.Outgo.Equals(Outgo));
+            ret = ret && (cmpObj.Profit.Equals(Profit));
+
+            return ret && base.Equals(obj);
+        }
     }
 }

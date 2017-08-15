@@ -190,7 +190,12 @@ namespace ProfitController
         private void SaveAs()
         {
             var path = ChooseFile(DlgMode.Save);
-            if (!string.IsNullOrEmpty(path) && !_dao.SaveModelToFile(_model, path))
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            if (_dao.SaveModelToFile(_model, path))
+                _filename = path;
+            else
                 MessageBox.Show("Не сохранено", "", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
@@ -204,8 +209,18 @@ namespace ProfitController
             SaveAs();
         }
 
+        private bool IsModelChanged()
+        {
+            ITreeModel cmpModel = new TreeModel();
+            if (!string.IsNullOrEmpty(_filename))
+                _dao.LoadModelFromFile(cmpModel, _filename);
+            return !cmpModel.Equals(_model);
+        }
         private bool AskConfirmationAndSave()
         {
+            if (!IsModelChanged())
+                return true;
+
             var dialogResult = MessageBox.Show("Все несохранённые данные будут утеряны! \nСохранить?",
                 "Внимание!", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
@@ -244,6 +259,7 @@ namespace ProfitController
             if (AskConfirmationAndSave())
             {
                 _model = new TreeModel();
+                _filename = string.Empty;
                 UpdateWindow();
             }
         }

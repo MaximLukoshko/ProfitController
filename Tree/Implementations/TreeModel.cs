@@ -49,5 +49,11 @@ namespace Tree.Implementations
         {
             Root = root ?? Root;
         }
+
+        public override bool Equals(object obj)
+        {
+            var cmpObj = obj as TreeModel;
+            return cmpObj != null ? Root.Equals(cmpObj.Root) : base.Equals(obj);
+        }
     }
 }
