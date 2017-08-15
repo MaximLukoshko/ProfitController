@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml.Linq;
-using Tree.BaseEnums;
 using Tree.Interfaces;
 using System.Linq;
 
@@ -10,18 +9,6 @@ namespace Tree.Implementations.TreeNode
 {
     public class Order : TreeNodeBase, IOrder
     {
-        private const string YEAR = @"Year";
-        private const string MONTH = @"Month";
-        private const string DAY = @"Day";
-        private const string DEVICE_NAME = @"DeviceName";
-        private const string ADDRESS = @"Address";
-        private const string PHONE = @"Phone";
-        private const string JOBTYPE = @"JobType";
-        private const string INSTALLED_DETAILS = @"InstalledDetails";
-        private const string INCOME = @"Income";
-        private const string OUTGO = @"OutGo";
-        private const string CAN_HAVE_CHILDREN = @"CanHaveChildren";
-
         #region IOrderLine
 
         public int Year { get; set; }
@@ -98,50 +85,50 @@ namespace Tree.Implementations.TreeNode
         public override XElement ToXElement()
         {
             return new XElement("Item",
-                new XElement(YEAR, Year),
-                new XElement(MONTH, (int) Month),
-                new XElement(DAY, Day),
-                new XElement(DEVICE_NAME, DeviceName),
-                new XElement(ADDRESS, Address),
-                new XElement(PHONE, Phone),
-                new XElement(JOBTYPE, JobType),
-                new XElement(INSTALLED_DETAILS, InstalledDetails),
-                new XElement(INCOME, Income),
-                new XElement(OUTGO, Outgo),
-                new XElement(CAN_HAVE_CHILDREN, _canHasChildren)
+                new XElement(StringConstants.Year, Year),
+                new XElement(StringConstants.Month, (int)Month),
+                new XElement(StringConstants.Day, Day),
+                new XElement(StringConstants.DeviceName, DeviceName),
+                new XElement(StringConstants.Address, Address),
+                new XElement(StringConstants.Phone, Phone),
+                new XElement(StringConstants.Jobtype, JobType),
+                new XElement(StringConstants.InstalledDetails, InstalledDetails),
+                new XElement(StringConstants.Income, Income),
+                new XElement(StringConstants.Outgo, Outgo),
+                new XElement(StringConstants.CanHaveChildren, _canHasChildren)
                 );
         }
 
         public override bool FromXElement(XElement elem)
         {
             int year = -1;
-            int.TryParse(elem.Elements(YEAR).FirstOrDefault().Value, out year);
+            int.TryParse(elem.Elements(StringConstants.Year).FirstOrDefault().Value, out year);
             Year = year;
 
             MonthEn month = 0;
-            Enum.TryParse(elem.Elements(MONTH).FirstOrDefault().Value, out month);
+            Enum.TryParse(elem.Elements(StringConstants.Month).FirstOrDefault().Value, out month);
             Month = month;
 
             int day = -1;
-            int.TryParse(elem.Elements(DAY).FirstOrDefault().Value, out day);
+            int.TryParse(elem.Elements(StringConstants.Day).FirstOrDefault().Value, out day);
             Day = day;
 
-            DeviceName = elem.Elements(DEVICE_NAME).FirstOrDefault().Value;
-            Address = elem.Elements(ADDRESS).FirstOrDefault().Value;
-            Phone = elem.Elements(PHONE).FirstOrDefault().Value;
-            JobType = elem.Elements(JOBTYPE).FirstOrDefault().Value;
-            InstalledDetails = elem.Elements(INSTALLED_DETAILS).FirstOrDefault().Value;
+            DeviceName = elem.Elements(StringConstants.DeviceName).FirstOrDefault().Value;
+            Address = elem.Elements(StringConstants.Address).FirstOrDefault().Value;
+            Phone = elem.Elements(StringConstants.Phone).FirstOrDefault().Value;
+            JobType = elem.Elements(StringConstants.Jobtype).FirstOrDefault().Value;
+            InstalledDetails = elem.Elements(StringConstants.InstalledDetails).FirstOrDefault().Value;
 
             int income = -1;
-            int.TryParse(elem.Elements(INCOME).FirstOrDefault().Value, out income);
+            int.TryParse(elem.Elements(StringConstants.Income).FirstOrDefault().Value, out income);
             Income = income;
 
             int outgo = -1;
-            int.TryParse(elem.Elements(OUTGO).FirstOrDefault().Value, out outgo);
+            int.TryParse(elem.Elements(StringConstants.Outgo).FirstOrDefault().Value, out outgo);
             Outgo = outgo;
 
             bool canhavechildren;
-            bool.TryParse(elem.Elements(CAN_HAVE_CHILDREN).FirstOrDefault().Value, out canhavechildren);
+            bool.TryParse(elem.Elements(StringConstants.CanHaveChildren).FirstOrDefault().Value, out canhavechildren);
             _canHasChildren = canhavechildren;
 
             return true;

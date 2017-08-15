@@ -8,7 +8,6 @@ namespace Tree.Implementations.TreeNode
 
     public class Year : TreeNodeBase
     {
-        private const string YEAR = @"Year";
         private int Value { get; set; }
         public override string NodeName
         {
@@ -34,12 +33,12 @@ namespace Tree.Implementations.TreeNode
 
         public override XElement ToXElement()
         {
-            return new XElement("Item", new XElement(YEAR, Value));
+            return new XElement("Item", new XElement(StringConstants.Year, Value));
         }
 
         public override bool FromXElement(XElement elem)
         {
-            var year = elem.Elements(YEAR).FirstOrDefault();
+            var year = elem.Elements(StringConstants.Year).FirstOrDefault();
             if (year != null)
             {
                 int val;
