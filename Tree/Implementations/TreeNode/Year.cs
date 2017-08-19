@@ -5,18 +5,9 @@ using System.Linq;
 
 namespace Tree.Implementations.TreeNode
 {
-
     public class Year : TreeNodeBase
     {
-        private const string YEAR = @"Year";
-        private int Value { get; set; }
-        public override string NodeName
-        {
-            get
-            {
-                return Value.ToString();
-            }
-        }
+        #region Constructors
 
         public Year(int val = 0)
         {
@@ -27,6 +18,15 @@ namespace Tree.Implementations.TreeNode
         {
         }
 
+        #endregion Constructors
+
+        #region TreeNodeBase
+
+        public override string NodeName
+        {
+            get { return Value.ToString(); }
+        }
+
         public override ITreeNode CreateNewChild()
         {
             return ChildNodes.Count < 12 ? new Month(Value, ChildNodes.Count) : null;
@@ -34,12 +34,12 @@ namespace Tree.Implementations.TreeNode
 
         public override XElement ToXElement()
         {
-            return new XElement("Item", new XElement(YEAR, Value));
+            return new XElement("Item", new XElement(StringConstants.Year, Value));
         }
 
         public override bool FromXElement(XElement elem)
         {
-            var year = elem.Elements(YEAR).FirstOrDefault();
+            var year = elem.Elements(StringConstants.Year).FirstOrDefault();
             if (year != null)
             {
                 int val;
@@ -48,5 +48,13 @@ namespace Tree.Implementations.TreeNode
             }
             return true;
         }
+
+        #endregion TreeNodeBase
+
+        #region PrivateMembers
+
+        private int Value { get; set; }
+
+        #endregion PrivateMembers
     }
 }

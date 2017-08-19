@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tree.BaseEnums;
-
-namespace Tree.Interfaces
+﻿namespace Tree.Interfaces
 {
     public interface IOrderLine
     {

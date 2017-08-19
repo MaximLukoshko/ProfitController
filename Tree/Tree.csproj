@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEnums.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Implementations\TreeModel.cs" />
     <Compile Include="Implementations\TreeNode\StaticNodes\AllTreeNode.cs" />
     <Compile Include="Implementations\TreeNode\TreeNodeBase.cs" />

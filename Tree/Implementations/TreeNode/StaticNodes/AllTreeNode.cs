@@ -6,12 +6,11 @@ namespace Tree.Implementations.TreeNode.StaticNodes
 {
     public class AllTreeNode : TreeNodeBase
     {
+        #region TreeNodeBase
+
         public override string NodeName
         {
-            get 
-            { 
-                return "Все"; 
-            }
+            get { return "Все"; }
         }
 
         public override ITreeNode CreateNewChild()
@@ -33,5 +32,7 @@ namespace Tree.Implementations.TreeNode.StaticNodes
         {
             return true;
         }
+
+        #endregion TreeNodeBase
     }
 }

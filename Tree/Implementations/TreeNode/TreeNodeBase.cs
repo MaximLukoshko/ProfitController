@@ -7,10 +7,16 @@ namespace Tree.Implementations.TreeNode
 {
     public abstract class TreeNodeBase : ITreeNode
     {
+        #region    Constructors
+
         protected TreeNodeBase()
         {
             AllChildren = new List<ITreeNode>();
         }
+
+        #endregion Constructors
+
+        #region    ITreeNode
 
         public abstract string NodeName { get; }
 
@@ -98,5 +104,41 @@ namespace Tree.Implementations.TreeNode
 
         public abstract XElement ToXElement();
         public abstract bool FromXElement(XElement elem);
+
+        #endregion ITreeNode
+
+        #region    Object
+
+#pragma warning disable 659
+        public override bool Equals(object obj)
+#pragma warning restore 659
+        {
+            // ReSharper disable once BaseObjectEqualsIsObjectEquals
+            if (base.Equals(obj))
+                return true;
+
+            var cmpObj = obj as TreeNodeBase;
+            if (cmpObj == null)
+                return false;
+
+            var ret = cmpObj.NodeName.Equals(NodeName);
+            if (!ret)
+                return false;
+
+            ret = cmpObj.CanHasChildren == CanHasChildren;
+            if (!ret)
+                return false;
+            ret = cmpObj.AllChildren.Count == AllChildren.Count;
+            if (!ret)
+                return false;
+
+            for (var i = 0; i < AllChildren.Count && ret; i++)
+                if (!cmpObj.AllChildren.ElementAt(i).Equals(AllChildren.ElementAt(i)))
+                    ret = false;
+
+            return ret;
+        }
+
+        #endregion Object
     }
 }

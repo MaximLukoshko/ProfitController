@@ -68,3 +68,10 @@
 /ProfitController/bin/x86/Release/ProfitController.exe
 /ProfitController/bin/x86/Release/ProfitController.exe.config
 /ProfitController/bin/x86/Release/ProfitController.pdb
+/ProfitController/bin/Debug
+/ProfitController/bin/Release
+/ProfitController/obj
+/DAOLayer/bin
+/DAOLayer/obj
+/Tree/obj
+/Tree/bin

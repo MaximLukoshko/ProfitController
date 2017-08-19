@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Tree.Implementations.TreeNode;
 using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
@@ -7,21 +6,24 @@ namespace Tree.Implementations
 {
     public class TreeModel : ITreeModel
     {
-        public ICollection<ITreeNode> Nodes
-        {
-            get 
-            {
-                return Root.ChildNodes;
-            }
-        }
-
-        public ITreeNode Root { get; set; }
+        #region Constructors
 
         public TreeModel()
         {
             Root = new UndefinedTreeNode();
             Root.AddChild(new AllTreeNode());
         }
+
+        #endregion Constructors
+
+        #region ITreeModel
+
+        public ICollection<ITreeNode> Nodes
+        {
+            get { return Root.ChildNodes; }
+        }
+
+        public ITreeNode Root { get; set; }
 
         public bool RemoveOrderFromNode(ITreeNode node, IOrderLine orderLine)
         {
@@ -49,5 +51,19 @@ namespace Tree.Implementations
         {
             Root = root ?? Root;
         }
+
+        #endregion ITreeModel
+
+        #region Object
+
+#pragma warning disable 659
+        public override bool Equals(object obj)
+#pragma warning restore 659
+        {
+            var cmpObj = obj as TreeModel;
+            return cmpObj != null && Root.Equals(cmpObj.Root);
+        }
+
+        #endregion Object
     }
 }

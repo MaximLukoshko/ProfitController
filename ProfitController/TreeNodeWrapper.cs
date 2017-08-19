@@ -4,12 +4,12 @@ namespace ProfitController
 {
     public class TreeNodeWrapper
     {
-        public ITreeNode Source { get; private set; }
-
         public TreeNodeWrapper(ITreeNode node)
         {
             Source = node;
         }
+
+        public ITreeNode Source { get; private set; }
 
         public override string ToString()
         {

@@ -1,21 +1,15 @@
 ﻿using DAOLayer.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
-using Tree.Implementations.TreeNode;
+using Tree;
 using Tree.Implementations.TreeNode.StaticNodes;
 using Tree.Interfaces;
 
 namespace DAOLayer.Implementations
 {
-    public class DAO : IDAO
+    public class Dao : IDao
     {
-        private const string CLASS_TYPE = @"ClassType";
-        private const string CHILDREN = @"Children";
+        #region IDao
 
         public bool SaveModelToFile(ITreeModel model, string filename)
         {
@@ -48,32 +42,39 @@ namespace DAOLayer.Implementations
             return true;
         }
 
+        #endregion IDao
+
+        #region HelpingMethods
+
         private XElement NodeToXElement(ITreeNode node)
         {
             var ret = node.ToXElement();
-            ret.Add(new XElement(CLASS_TYPE, TreeNodeFactory.GetTypeFromElement(node)));
+            ret.Add(new XElement(StringConstants.ClassType, TreeNodeFactory.GetTypeFromElement(node)));
             if (node.AllChildren.Count > 0)
             {
-                var children = new XElement(CHILDREN);
+                var children = new XElement(StringConstants.Children);
                 foreach (var child in node.AllChildren)
                 {
                     children.Add(NodeToXElement(child));
                 }
                 ret.Add(children);
             }
-                
+
             return ret;
         }
 
         private ITreeNode NodeFromXElement(XElement element)
         {
-            var ret = TreeNodeFactory.CreateTreeNode(element.Elements(CLASS_TYPE).FirstOrDefault().Value);
+            // ReSharper disable once PossibleNullReferenceException
+            var ret = TreeNodeFactory.CreateTreeNode(element.Elements(StringConstants.ClassType).FirstOrDefault().Value);
             ret.FromXElement(element);
-            var childElements = element.Elements(CHILDREN);
-            foreach(var ch in childElements.Elements())
+            var childElements = element.Elements(StringConstants.Children);
+            foreach (var ch in childElements.Elements())
                 ret.AddChild(NodeFromXElement(ch));
-            
+
             return ret;
         }
+
+        #endregion HelpingMethods
     }
 }

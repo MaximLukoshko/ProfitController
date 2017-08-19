@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
-using Tree.BaseEnums;
 
 namespace Tree.Interfaces
 {
@@ -13,7 +8,6 @@ namespace Tree.Interfaces
     // !!! ATTENTION !!! //
     public interface ITreeNode
     {
-
         string NodeName { get; }
         ICollection<IOrderLine> Orders { get; }
         IDictionary<string, object> Summary { get; }

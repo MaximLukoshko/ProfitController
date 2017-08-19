@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Tree.Interfaces
 {
     public interface ITreeModel
     {
         ICollection<ITreeNode> Nodes { get; }
-        ITreeNode Root { get;}
+        ITreeNode Root { get; }
 
         bool AddChildToNode(ITreeNode node, ITreeNode childNode = null);
         bool RemoveNode(ITreeNode node);

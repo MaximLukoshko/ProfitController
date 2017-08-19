@@ -4,13 +4,13 @@ namespace Tree.Implementations.TreeNode.StaticNodes
 {
     public class UndefinedTreeNode : TreeNodeBase
     {
+        #region TreeNodeBase
+
         public override string NodeName
         {
-            get 
-            { 
-                return "<...>"; 
-            }
+            get { return "<...>"; }
         }
+
         public override XElement ToXElement()
         {
             return new XElement("Item");
@@ -20,5 +20,7 @@ namespace Tree.Implementations.TreeNode.StaticNodes
         {
             return true;
         }
+
+        #endregion TreeNodeBase
     }
 }

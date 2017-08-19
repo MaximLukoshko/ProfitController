@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ProfitController" Height="Auto" Width="Auto" MinWidth="300" MinHeight="200">
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="Refresh" Executed="Update_BtnClick" />
         <CommandBinding Command="Save" Executed="Save_BtnClick" />
@@ -12,7 +12,7 @@
         <CommandBinding Command="Close" Executed="Close_BtnClick" />
     </Window.CommandBindings>
     <Window.InputBindings>
-        <KeyBinding Command="Refresh" Key="F5"/>
+        <KeyBinding Command="Refresh" Key="F5" />
     </Window.InputBindings>
 
     <Grid Margin="0" Height="Auto" Width="Auto">
@@ -21,7 +21,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -30,19 +30,19 @@
         </Grid.RowDefinitions>
 
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="Auto" VerticalAlignment="Top">
-            <MenuItem Header="_Файл" >
-                <MenuItem Header="_Создать" HorizontalAlignment="Stretch" Command="New"/>
-                <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Command="Open"/>
-                <MenuItem Header="_Сохранить" HorizontalAlignment="Stretch" Command="Save"/>
-                <MenuItem Header="_Сохранить как..." HorizontalAlignment="Stretch" Command="SaveAs"/>
-                <Separator/>
-                <MenuItem Header="_Выход" HorizontalAlignment="Stretch" Command="Close"/>
+            <MenuItem Header="_Файл">
+                <MenuItem Header="_Создать" HorizontalAlignment="Stretch" Command="New" />
+                <MenuItem Header="_Открыть..." HorizontalAlignment="Stretch" Command="Open" />
+                <MenuItem Header="_Сохранить" HorizontalAlignment="Stretch" Command="Save" />
+                <MenuItem Header="_Сохранить как..." HorizontalAlignment="Stretch" Command="SaveAs" />
+                <Separator />
+                <MenuItem Header="_Выход" HorizontalAlignment="Stretch" Command="Close" />
             </MenuItem>
-            <MenuItem Header="_Обновить(F5)" HorizontalAlignment="Stretch" Command="Refresh" InputGestureText="R"/>
+            <MenuItem Header="_Обновить(F5)" HorizontalAlignment="Stretch" Command="Refresh" InputGestureText="R" />
         </Menu>
 
-        <ToolBarTray Name="toolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
-            <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=toolButTray, Path=ActualWidth}">
+        <ToolBarTray Name="ToolButTray" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+            <ToolBar HorizontalAlignment="Stretch" Width="{Binding ElementName=ToolButTray, Path=ActualWidth}">
                 <Button ToolTip="Создать" Command="New">
                     <Image Height="24" Width="24" Source="/Content/icons/file/new.ico" />
                 </Button>
@@ -55,40 +55,40 @@
                 <Button ToolTip="Сохранить как" Command="SaveAs">
                     <Image Height="24" Width="24" Source="/Content/icons/file/saveas.ico" />
                 </Button>
-                <Separator/>
+                <Separator />
                 <Button ToolTip="Обновить(F5)" Command="Refresh">
                     <Image Height="24" Width="24" Source="/Content/icons/file/refresh.ico" />
                 </Button>
-                <Separator/>
+                <Separator />
                 <Button ToolTip="Закрыть" Command="Close">
                     <Image Height="24" Width="24" Source="/Content/icons/file/close.ico" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        
-        <ListView 
-            Name="trw_Orders" 
-            DataContext="{Binding Nodes}" 
-            Margin="5" 
-            Width="Auto" 
-            MinWidth="150" 
+
+        <ListView
+            Name="TrwOrders"
+            DataContext="{Binding Nodes}"
+            Margin="5"
+            Width="Auto"
+            MinWidth="150"
             Height="Auto"
-            Grid.Column="0" 
-            Grid.Row="2" 
+            Grid.Column="0"
+            Grid.Row="2"
             Grid.RowSpan="2"
             MouseLeftButtonUp="treeItem_MouseLeftButtonUp"
             MouseDoubleClick="trw_Orders_MouseDoubleClick">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Добавить" Command="{Binding Command}" Click="Row_Add"/>
-                    <MenuItem Header="Удалить" Command="{Binding Command}" Click="Row_Delete"/>
-                    <MenuItem Header="Сохранить в файл" Command="{Binding Command}" Click="TrwSaveAs_Click"/>
+                    <MenuItem Header="Добавить" Command="{Binding Command}" Click="Row_Add" />
+                    <MenuItem Header="Удалить" Command="{Binding Command}" Click="Row_Delete" />
+                    <MenuItem Header="Сохранить в файл" Command="{Binding Command}" Click="TrwSaveAs_Click" />
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
-        
-        <DataGrid 
-            Name="dgrd_Orders"
+
+        <DataGrid
+            Name="DgrdOrders"
             Width="Auto"
             Margin="5"
             Grid.Row="2"
@@ -98,37 +98,47 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Добавить" HorizontalAlignment="Stretch" Click="AddToGrid_Click"/>
-                    <MenuItem Header="Удалить" HorizontalAlignment="Stretch" Click="DeleteFromGrid_Click"/>
+                    <MenuItem Header="Добавить" HorizontalAlignment="Stretch" Click="AddToGrid_Click" />
+                    <MenuItem Header="Удалить" HorizontalAlignment="Stretch" Click="DeleteFromGrid_Click" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Год" IsReadOnly="True" Width="Auto" Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Месяц" IsReadOnly="True" Width="Auto" Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="День" Width="Auto" Binding="{Binding Path=Day, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Наименование изделия" Width="*" Binding="{Binding Path=DeviceName, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Path=Address, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Телефон" Width="Auto" Binding="{Binding Path=Phone, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Выполненные работы" Width="*" Binding="{Binding Path=JobType, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Установленные запчасти" Width="*" Binding="{Binding Path=InstalledDetails, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Расходы" Width="Auto" Binding="{Binding Path=Outgo, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Стоимость ремонта" Width="*" Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}"/>
-                <DataGridTextColumn Header="Доход" Width="*" IsReadOnly="True" Binding="{Binding Path=Profit}"/>
+                <DataGridTextColumn Header="Год" IsReadOnly="True" Width="Auto"
+                                    Binding="{Binding Path=Year, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Месяц" IsReadOnly="True" Width="Auto"
+                                    Binding="{Binding Path=Month, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="День" Width="Auto"
+                                    Binding="{Binding Path=Day, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Наименование изделия" Width="*"
+                                    Binding="{Binding Path=DeviceName, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Адрес" Width="*"
+                                    Binding="{Binding Path=Address, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Телефон" Width="Auto"
+                                    Binding="{Binding Path=Phone, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Выполненные работы" Width="*"
+                                    Binding="{Binding Path=JobType, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Установленные запчасти" Width="*"
+                                    Binding="{Binding Path=InstalledDetails, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Расходы" Width="Auto"
+                                    Binding="{Binding Path=Outgo, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Стоимость ремонта" Width="*"
+                                    Binding="{Binding Path=Income, UpdateSourceTrigger=LostFocus}" />
+                <DataGridTextColumn Header="Доход" Width="*" IsReadOnly="True" Binding="{Binding Path=Profit}" />
             </DataGrid.Columns>
         </DataGrid>
-        
-        <DataGrid x:Name="dgrd_Summary" 
-                  Grid.Column="2" 
-                  Grid.Row="3" 
-                  Width="Auto" 
-                  Height="90" 
-                  Margin="5" 
+
+        <DataGrid x:Name="DgrdSummary"
+                  Grid.Column="2"
+                  Grid.Row="3"
+                  Width="Auto"
+                  Height="90"
+                  Margin="5"
                   AutoGenerateColumns="False"
                   IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="Auto" Binding="{Binding Path=Key}"/>
-                <DataGridTextColumn Width="*" Binding="{Binding Path=Value}"/>
+                <DataGridTextColumn Width="Auto" Binding="{Binding Path=Key}" />
+                <DataGridTextColumn Width="*" Binding="{Binding Path=Value}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
